@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_file_root_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/moor_bg_in_msg"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/tv_file_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="5dp"
+        android:layout_toStartOf="@id/rl_file_icon_progress"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:textColor="@color/moor_color_151515"
+        android:textSize="@dimen/moor_text_type_size"
+        tools:text="名称名称名称名称名称名称名称名名名称名称名称名称名称名称称名称名称名称名称名称名称名称名称名称名称名称称名称名称名称名称名称" />
+
+    <TextView
+        android:id="@+id/tv_file_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_file_title"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/moor_color_999999"
+        android:textSize="@dimen/moor_text_type_small_size"
+        tools:text="22sssss23" />
+
+    <RelativeLayout
+        android:id="@+id/rl_file_icon_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:id="@+id/iv_file_icon"
+            android:layout_width="45dp"
+            android:layout_height="60dp"
+            android:src="@drawable/moor_icon_file_default" />
+
+        <com.moor.imkf.demo.view.MoorCircleProgressView
+            android:id="@+id/chat_content_file_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/iv_file_icon"
+            android:layout_alignTop="@id/iv_file_icon"
+            android:layout_alignEnd="@id/iv_file_icon"
+            android:layout_alignBottom="@id/iv_file_icon"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:visibility="gone"
+            app:moor_circleCorner="3dp"
+            app:moor_startAngle="270" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Demo</string>
+    <string name="good_7moor">好客服 用七陌</string>
+    <string name="im_sdk_kf">即时联系在线客服</string>
+    <string name="video_voice_text">视频、语音、文字、表情、图片、文件</string>
+    <string name="contact_im">点击咨询</string>
+</resources>

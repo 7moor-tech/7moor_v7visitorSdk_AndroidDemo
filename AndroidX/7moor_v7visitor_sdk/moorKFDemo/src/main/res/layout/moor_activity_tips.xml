@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/moor_color_ffffff">
+
+    <RelativeLayout
+        android:id="@+id/rl_top_tip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/iv_tip_img"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/moor_icon_notice" />
+
+        <TextView
+            android:id="@+id/tv_moor_tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/iv_tip_close"
+            android:layout_toRightOf="@+id/iv_tip_img"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/moor_text_tip_size" />
+
+        <ImageView
+            android:id="@+id/iv_tip_close"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/moor_icon_notice_close" />
+    </RelativeLayout>
+
+</RelativeLayout>

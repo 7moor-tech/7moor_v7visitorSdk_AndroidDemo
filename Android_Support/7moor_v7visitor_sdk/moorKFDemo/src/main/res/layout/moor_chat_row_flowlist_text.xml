@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_main"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+        android:id="@+id/sl_flow_list_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:moor_cornerRadius="10dp"
+        app:moor_layoutBackground="@color/moor_color_ffffff">
+
+        <com.moor.imkf.demo.view.MoorMaxWidthLinearLayout
+            android:id="@+id/ll_flow_list_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+
+    <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+        android:id="@+id/sl_flow_tips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:moor_cornerRadius_leftBottom="0dp"
+        app:moor_cornerRadius_leftTop="10dp"
+        app:moor_cornerRadius_rightBottom="0dp"
+        app:moor_cornerRadius_rightTop="10dp"
+        app:moor_layoutBackground="@color/moor_color_ffffff">
+
+        <LinearLayout
+            android:id="@+id/ll_flow_tips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+
+
+    <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+        android:id="@+id/sl_flow_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/moor_chat_msg_padding_left_right"
+        android:paddingRight="@dimen/moor_chat_msg_padding_left_right"
+        android:paddingBottom="@dimen/moor_chat_msg_padding_top_bottom"
+        app:moor_cornerRadius_leftBottom="10dp"
+        app:moor_cornerRadius_leftTop="0dp"
+        app:moor_cornerRadius_rightBottom="10dp"
+        app:moor_cornerRadius_rightTop="0dp"
+        app:moor_layoutBackground="@color/moor_color_ffffff">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rl_robot_flowlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/moor_chat_msg_padding_left_right"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+    </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+
+
+</LinearLayout>

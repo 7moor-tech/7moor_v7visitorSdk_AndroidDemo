@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/moor_bg_common_bottom_sheet">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"
+            android:text="请您对我的服务做出评价"
+            android:textColor="@color/moor_color_333333"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_bottom_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:padding="10dp"
+            android:src="@drawable/moor_icon_dialog_close" />
+    </RelativeLayout>
+
+    <com.moor.imkf.demo.view.MoorEvaScrollView
+        android:id="@+id/moor_eva_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/moor_color_ffffff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_eva_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="25dp"
+                android:textColor="@color/moor_color_333333"
+                android:textSize="15sp" />
+
+            <com.moor.imkf.demo.view.MoorMeasureListView
+                android:id="@+id/lv_eva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="25dp"
+                android:divider="@null" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:background="@color/moor_color_ededed" />
+
+            <com.moor.imkf.demo.view.MoorTagView
+                android:id="@+id/tag_eva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="25dp">
+
+                <EditText
+                    android:id="@+id/et_eva"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@drawable/moor_evaluation_bg_edittext"
+                    android:gravity="top"
+                    android:hint="@string/moor_evaluation_hint"
+                    android:padding="15dp"
+                    android:textColor="@color/moor_color_151515"
+                    android:textColorHint="@color/moor_color_999999"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_eva_edit_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center_vertical"
+                    android:text="0/50"
+                    android:textColor="@color/moor_color_999999"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/investigate_btn_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+                    android:id="@+id/sl_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/moor_left_margin_10"
+                    android:layout_marginRight="15dp"
+                    app:moor_cornerRadius="5dp"
+                    app:moor_layoutBackground="@color/moor_color_0081ff"
+                    app:moor_layoutBackground_true="@color/moor_color_890081ff"
+                    app:moor_shapeMode="pressed">
+
+                    <TextView
+                        android:id="@+id/tv_eva_submit"
+                        android:layout_width="118dp"
+                        android:layout_height="42dp"
+                        android:gravity="center"
+                        android:text="@string/moor_evaluation_submit"
+                        android:textColor="@color/moor_color_ffffff"
+                        android:textSize="15sp" />
+                </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+
+                <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+                    android:id="@+id/sl_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/moor_left_margin_10"
+                    app:moor_cornerRadius="5dp"
+                    app:moor_layoutBackground="@color/moor_color_ffffff"
+                    app:moor_layoutBackground_true="@color/moor_color_e4e4e4"
+                    app:moor_shapeMode="pressed"
+                    app:moor_strokeColor="@color/moor_color_e4e4e4"
+                    app:moor_strokeWith="0.5dp">
+
+                    <TextView
+                        android:id="@+id/tv_eva_cancel"
+                        android:layout_width="118dp"
+                        android:layout_height="42dp"
+                        android:gravity="center"
+                        android:text="@string/moor_cancel"
+                        android:textColor="@color/moor_color_666666"
+                        android:textSize="15sp" />
+                </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.moor.imkf.demo.view.MoorEvaScrollView>
+</LinearLayout>

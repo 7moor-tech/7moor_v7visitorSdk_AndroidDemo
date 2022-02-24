@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sl_single_ver"
+    android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:layout_margin="5dp"
+    app:moor_bindTextView="@+id/tv_flow_text"
+    app:moor_cornerRadius="17.5dp"
+    app:moor_shapeMode="pressed"
+    app:moor_textColor="@color/moor_color_ffffff"
+    app:moor_textColor_true="@color/moor_color_80ffffff">
+
+    <TextView
+        android:id="@+id/tv_flow_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:lines="1"
+        android:maxEms="6"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textColor="@color/moor_color_ffffff"
+        android:textSize="13sp"
+        tools:text="选项选项选项选项选项" />
+</com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>

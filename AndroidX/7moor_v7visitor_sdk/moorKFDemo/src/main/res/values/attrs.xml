@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="moor_CircleImageView">
+        <attr name="moor_civ_border_width" format="dimension" />
+        <attr name="moor_civ_border_color" format="color" />
+        <attr name="moor_civ_border_overlay" format="boolean" />
+        <attr name="moor_civ_circle_background_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="moor_RoundImageView">
+
+        <!--圆角大小-->
+        <attr name="moor_corner_radius" format="dimension" />
+
+        <!--图片类型：圆角或者圆形-->
+        <attr name="moor_type" format="enum">
+            <enum name="round" value="1" />
+            <enum name="circle" value="0" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="moor_CircleProgress">
+        <attr name="moor_circleProgress" format="integer" /> <!-- 进度0-100 -->
+        <attr name="moor_startAngle" format="integer" /> <!-- 开始的角度0-360 -->
+        <attr name="moor_circleCorner" format="dimension" /> <!-- 圆角 -->
+        <attr name="moor_backgroundColor" format="color" /> <!-- 背景的颜色 -->
+    </declare-styleable>
+
+    <declare-styleable name="moor_SubsamplingScaleImageView">
+        <attr name="moor_src" format="reference" />
+        <attr name="moor_assetName" format="string" />
+        <attr name="moor_panEnabled" format="boolean" />
+        <attr name="moor_zoomEnabled" format="boolean" />
+        <attr name="moor_quickScaleEnabled" format="boolean" />
+        <attr name="moor_tileBackgroundColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="moor_ShadowLayout">
+        <!-- 1、关于阴影 -->
+        <!--阴影：是否要显示阴影，可能有只想用shape和selector功能，不想要阴影-->
+        <attr name="moor_shadowHidden" format="boolean" />
+        <!--阴影：阴影颜色-->
+        <attr name="moor_shadowColor" format="color" />
+        <!--阴影：阴影的扩散范围(也可以理解为扩散程度)-->
+        <attr name="moor_shadowLimit" format="dimension" />
+        <!--控件区域是否对称，默认是对称。不对称的话，那么控件区域随着阴影区域走-->
+        <attr name="moor_shadowSymmetry" format="boolean" />
+        <!--阴影：x轴的偏移量-->
+        <attr name="moor_shadowOffsetX" format="dimension" />
+        <!--阴影：y轴的偏移量-->
+        <attr name="moor_shadowOffsetY" format="dimension" />
+        <!--阴影：左边是否隐藏阴影-->
+        <attr name="moor_shadowHiddenLeft" format="boolean" />
+        <!--阴影：右边是否隐藏阴影-->
+        <attr name="moor_shadowHiddenRight" format="boolean" />
+        <!--阴影：上边是否隐藏阴影-->
+        <attr name="moor_shadowHiddenTop" format="boolean" />
+        <!--阴影：下面是否隐藏阴影-->
+        <attr name="moor_shadowHiddenBottom" format="boolean" />
+
+
+        <!-- 2、关于圆角 -->
+        <!--圆角：统一大小，其中包括了阴影，shape、背景图、stroke边框圆角-->
+        <attr name="moor_cornerRadius" format="dimension" />
+        <!--圆角：左上圆角。设置后会忽略moor_cornerRadius的值-->
+        <attr name="moor_cornerRadius_leftTop" format="dimension" />
+        <!--圆角：右上圆角。同上-->
+        <attr name="moor_cornerRadius_rightTop" format="dimension" />
+        <!--圆角：左下圆角。同上-->
+        <attr name="moor_cornerRadius_leftBottom" format="dimension" />
+        <!--圆角：右下圆角。同上-->
+        <attr name="moor_cornerRadius_rightBottom" format="dimension" />
+
+
+        <!-- 3、关于shape及selector -->
+        <!-- shape及selector样式：pressed、sectored -->
+        <attr name="moor_shapeMode">
+            <enum name="pressed" value="1" />
+            <enum name="selected" value="2" />
+            <enum name="ripple" value="3" />
+        </attr>
+
+        <!-- 为false的默认背景，可单独使用-->
+        <attr name="moor_layoutBackground" format="reference|color" />
+        <!-- 为true的默认背景，必须搭配moor_layoutBackground属性使用。否则报错-->
+        <attr name="moor_layoutBackground_true" format="reference|color" />
+
+        <!-- stroke样式，stroke的宽度-->
+        <attr name="moor_strokeWith" format="dimension" />
+        <!-- 为false时，默认的stoke颜色值，可单独使用-->
+        <attr name="moor_strokeColor" format="color" />
+        <!-- 为true时，默认的stoke颜色值，必须搭配moor_strokeColor属性使用。否则报错-->
+        <attr name="moor_strokeColor_true" format="color" />
+
+
+        <!-- 这里最终舍弃了系统clickable的方案，因为系统系统主动设置setOnClickListener后，会主动设置成true,所以这里采用自定义 -->
+        <attr name="clickable" format="boolean" tools:ignore="ResourceName" />
+        <!-- moor_clickable为false时，要展示的图片或颜色-->
+        <attr name="moor_layoutBackground_clickFalse" format="reference|color" />
+
+
+        <!-- 4、关于填充的渐变色 -->
+        <!-- 要知道，如果设置了渐变色。那么将以渐变色为主。moor_layoutBackground属性将无效 -->
+        <!-- 渐变的起始颜色 -->
+        <attr name="moor_startColor" format="color" />
+        <!-- 渐变的中间颜色 -->
+        <attr name="moor_centerColor" format="color" />
+        <!-- 渐变的终止颜色 -->
+        <attr name="moor_endColor" format="color" />
+        <!-- 渐变角度，默认值为0-->
+        <attr name="moor_angle" format="integer" />
+
+
+        <!-- 5、绑定一个TextView，在点击按钮时，有可能有颜色变化 -->
+        <attr name="moor_bindTextView" format="reference" />
+        <attr name="moor_textColor" format="color" />
+        <attr name="moor_textColor_true" format="color" />
+        <attr name="moor_text" format="string" />
+        <attr name="moor_text_true" format="string" />
+
+
+    </declare-styleable>
+
+    <declare-styleable name="moor_PointBottomView">
+        <!-- 被选中圆点的颜色 -->
+        <attr name="moor_fillColor" format="color" />
+        <!-- 未选中圆点的颜色 -->
+        <attr name="moor_point_strokeColor" format="color" />
+        <!-- 圆点的大小 -->
+        <attr name="moor_radius" format="dimension" />
+        <!-- 圆点间间距的大小 -->
+        <attr name="moor_circleInterval" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="moor_FlexboxLayout">
+        <attr name="moor_flexDirection">
+            <enum name="row" value="0" />
+            <enum name="row_reverse" value="1" />
+            <enum name="column" value="2" />
+            <enum name="column_reverse" value="3" />
+        </attr>
+
+        <attr name="moor_flexWrap">
+            <enum name="nowrap" value="0" />
+            <enum name="wrap" value="1" />
+            <enum name="wrap_reverse" value="2" />
+        </attr>
+
+        <!--
+            Omitting flex-flow property since it's reflected in the parent flex container.
+            Set the flexDirection and/or flexWrap to the parent flex container explicitly if you
+            want to use the flex-flow similar way to the web.
+         -->
+
+        <attr name="moor_justifyContent">
+            <enum name="flex_start" value="0" />
+            <enum name="flex_end" value="1" />
+            <enum name="center" value="2" />
+            <enum name="space_between" value="3" />
+            <enum name="space_around" value="4" />
+            <enum name="space_evenly" value="5" />
+        </attr>
+
+        <attr name="moor_alignItems">
+            <enum name="flex_start" value="0" />
+            <enum name="flex_end" value="1" />
+            <enum name="center" value="2" />
+            <enum name="baseline" value="3" />
+            <enum name="stretch" value="4" />
+        </attr>
+
+        <attr name="moor_alignContent">
+            <enum name="flex_start" value="0" />
+            <enum name="flex_end" value="1" />
+            <enum name="center" value="2" />
+            <enum name="space_between" value="3" />
+            <enum name="space_around" value="4" />
+            <enum name="stretch" value="5" />
+        </attr>
+
+        <attr name="moor_dividerDrawable" format="reference" />
+        <attr name="moor_dividerDrawableHorizontal" format="reference" />
+        <attr name="moor_dividerDrawableVertical" format="reference" />
+
+        <attr name="moor_showDivider">
+            <flag name="none" value="0" />
+            <flag name="beginning" value="1" />
+            <flag name="middle" value="2" />
+            <flag name="end" value="4" />
+        </attr>
+        <attr name="moor_showDividerHorizontal">
+            <flag name="none" value="0" />
+            <flag name="beginning" value="1" />
+            <flag name="middle" value="2" />
+            <flag name="end" value="4" />
+        </attr>
+        <attr name="moor_showDividerVertical">
+            <flag name="none" value="0" />
+            <flag name="beginning" value="1" />
+            <flag name="middle" value="2" />
+            <flag name="end" value="4" />
+        </attr>
+
+        <!--
+            The attribute that specifies the maximum number of flex lines. This attribute is
+            effective only when the flexWrap attribute is "wrap" or "wrap_reverse".
+        -->
+        <attr name="moor_maxLine" format="integer" />
+
+    </declare-styleable>
+
+    <declare-styleable name="moor_FlexboxLayout_Layout">
+        <attr name="moor_layout_order" format="integer" />
+
+        <!-- Negative numbers are invalid. -->
+        <attr name="moor_layout_flexGrow" format="float" />
+
+        <!-- Negative numbers are invalid. -->
+        <attr name="moor_layout_flexShrink" format="float" />
+
+        <!--
+            The initial length in a percentage format relative to its parent. This is similar to the
+            flex-basis property in the original CSS specification.
+            (https://www.w3.org/TR/css-flexbox-1/#flex-basis-property)
+            But unlike the flex-basis property, this attribute only accepts a value in fraction
+            (percentage), whereas flex-basis property accepts width values such as 1em, 10px and
+            the 'content' string.
+            But specifying initial fixed width values can be done by specifying width values in
+            layout_width (or layout_height, varies depending on the flexDirection). Also the same
+            effect can be done by specifying "wrap_content" in layout_width (or layout_height) if
+            developers want to achieve the same effect as 'content'.
+            Thus, this attribute only accepts fraction values, which can't be done through
+            layout_width (or layout_height) for simplicity.
+        -->
+        <attr name="moor_layout_flexBasisPercent" format="fraction" />
+
+        <!--
+            Omitting flex property since it's a shorthand for layout_flexGrow and layout_flexShrink
+            and layout_percentInParent (flex-basis in the original CSS spec).
+        -->
+
+        <attr name="moor_layout_alignSelf">
+            <enum name="auto" value="-1" />
+            <!-- The values below need to match the values of alignItems -->
+            <enum name="flex_start" value="0" />
+            <enum name="flex_end" value="1" />
+            <enum name="center" value="2" />
+            <enum name="baseline" value="3" />
+            <enum name="stretch" value="4" />
+        </attr>
+
+        <attr name="moor_layout_minWidth" format="dimension" />
+        <attr name="moor_layout_minHeight" format="dimension" />
+        <attr name="moor_layout_maxWidth" format="dimension" />
+        <attr name="moor_layout_maxHeight" format="dimension" />
+
+        <!--
+            This attribute forces a flex line wrapping. i.e. if this is set to true for a
+            flex item, the item will become the first item of a flex line. (A wrapping happens
+            regardless of the flex items being processed in the the previous flex line)
+            This attribute is ignored if the flex_wrap attribute is set to nowrap.
+            The equivalent attribute isn't defined in the original CSS Flexible Box Module
+            specification, but having this attribute is useful for Android developers to flatten
+            the layouts when building a grid like layout or for a situation where developers want
+            to put a new flex line to make a semantic difference from the previous one, etc.
+        -->
+        <attr name="moor_layout_wrapBefore" format="boolean" />
+    </declare-styleable>
+</resources>

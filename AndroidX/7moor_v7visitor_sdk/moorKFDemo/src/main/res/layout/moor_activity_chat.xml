@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.moor.imkf.demo.panel.MoorSwitchRootLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/moor_color_eeeeee"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/rl_moorChatTitle"
+            layout="@layout/moor_layout_chat_title" />
+
+        <!--顶部Tip布局-->
+        <include
+            android:id="@+id/rl_moorChat_Top"
+            layout="@layout/moor_activity_tips"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/moor_swipe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_chat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_edit_associate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/moor_color_ffffff"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </RelativeLayout>
+
+        <!--排队数提示-->
+        <include layout="@layout/moor_activity_queue_layout" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/moor_color_e5e5e5" />
+        <!--底部按钮-横向滑动-->
+        <include layout="@layout/moor_activity_bottom_recyclerview" />
+
+        <include layout="@layout/moor_layout_chat_input" />
+
+        <com.moor.imkf.demo.panel.MoorSwitchFSPanelLinearLayout
+            android:id="@+id/panel_root"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/moor_panel_height"
+            android:background="@color/moor_color_f6f6f6"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <include
+                android:id="@+id/panel_more"
+                layout="@layout/moor_panel_add_layout" />
+
+            <include
+                android:id="@+id/panel_emotion"
+                layout="@layout/moor_panel_emotion_layout" />
+        </com.moor.imkf.demo.panel.MoorSwitchFSPanelLinearLayout>
+
+    </LinearLayout>
+
+
+</com.moor.imkf.demo.panel.MoorSwitchRootLinearLayout>

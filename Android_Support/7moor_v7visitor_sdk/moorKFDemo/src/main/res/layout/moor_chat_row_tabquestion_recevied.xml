@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_tabquestion"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/moor_bg_in_msg"
+        android:orientation="vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <ImageView
+            android:id="@+id/iv_tabqus"
+            android:layout_width="155.5dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="4dp"
+            android:background="@color/moor_color_0081ff"
+            android:scaleType="fitXY"
+            android:src="@drawable/moor_icon_tabquestion" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tb_question"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:tabIndicatorColor="@color/moor_color_0081ff"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/moor_color_0081ff"
+            app:tabTextAppearance="@style/moor_Tab_QuestionText"
+            app:tabTextColor="@color/moor_color_333333" />
+
+
+        <!--            <com.m7.imkfsdk.view.EnhanceTabLayout-->
+        <!--                android:id="@+id/tb_question"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="48dp"-->
+        <!--                app:tabIndicatorHeight="3dp"-->
+        <!--                app:tabIndicatorWidth="30dp"-->
+        <!--                app:tabTextColor="@color/color_333333"-->
+        <!--                app:tab_Mode="mode_scrollable"-->
+        <!--                app:tabSelectTextColor="@color/ykf_color_default"-->
+        <!--                app:tabIndicatorColor="@color/ykf_color_default"-->
+        <!--                >-->
+        <!--            </com.m7.imkfsdk.view.EnhanceTabLayout>-->
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/moor_color_fafafa" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_tabquestion"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+        <TextView
+            android:id="@+id/tv_seemore"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="12dp"
+            android:text="@string/moor_tips_lookmore"
+            android:textColor="@color/moor_color_0081ff"
+            android:textSize="15sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+
+</LinearLayout>

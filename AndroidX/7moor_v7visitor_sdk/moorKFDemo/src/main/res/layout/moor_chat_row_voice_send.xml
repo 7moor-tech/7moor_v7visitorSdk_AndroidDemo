@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_voice_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/moor_bg_out_msg"
+    android:minHeight="@dimen/moor_chat_avatar_size">
+
+    <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+        android:id="@+id/sl_voice_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:minHeight="@dimen/moor_chat_avatar_size"
+        app:moor_cornerRadius="10dp"
+        app:moor_layoutBackground="@color/moor_color_cee6fc"
+        app:moor_shapeMode="pressed">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minHeight="@dimen/moor_chat_avatar_size">
+
+            <ImageView
+                android:id="@+id/iv_sendplay_anim"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/moor_voice_send_play3" />
+
+            <TextView
+                android:id="@+id/tv_item_voice_longTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="4dp"
+                android:layout_toLeftOf="@id/iv_sendplay_anim"
+                android:textColor="@color/moor_color_151515"
+                android:textSize="@dimen/moor_voice_longTextSize"
+                tools:text="2''" />
+        </RelativeLayout>
+
+
+    </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+
+</RelativeLayout>

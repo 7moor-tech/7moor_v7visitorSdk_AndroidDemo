@@ -1,0 +1,3 @@
+include ':moorKFDemo'
+include ':app'
+rootProject.name = "Moor_v7_sdk"

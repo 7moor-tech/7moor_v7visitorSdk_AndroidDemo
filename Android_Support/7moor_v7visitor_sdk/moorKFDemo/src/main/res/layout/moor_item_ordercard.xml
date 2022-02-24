@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="14dp"
+    android:paddingTop="10dp"
+    android:layout_marginRight="14dp"
+    android:orientation="vertical"
+    android:id="@+id/rl_order_item">
+
+    <com.moor.imkf.demo.view.MoorRoundImageView
+        android:id="@+id/iv_orderimg"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"></com.moor.imkf.demo.view.MoorRoundImageView>
+
+    <TextView
+        android:id="@+id/tv_order_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/iv_orderimg"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="每个按钮可设置按钮名称和点击按钮跳转地址，对于按钮点击事件需要能区分是嵌入IFrame打开还是新窗口打开；按钮仅座席端可操作"
+        android:textColor="@color/moor_color_666666"
+        android:textSize="14sp"></TextView>
+
+
+    <TextView
+        android:gravity="bottom"
+        android:id="@+id/tv_order_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_order_content"
+        android:layout_alignBottom="@+id/iv_orderimg"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/iv_orderimg"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="9999"
+        android:textColor="@color/moor_color_0081ff"
+        android:textSize="14sp"></TextView>
+
+</RelativeLayout>

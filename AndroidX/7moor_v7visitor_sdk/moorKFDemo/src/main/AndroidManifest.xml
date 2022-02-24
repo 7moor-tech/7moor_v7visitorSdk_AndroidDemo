@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.moor.imkf.demo">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application>
+
+<!--        <provider-->
+<!--            android:name="com.moor.imkf.demo.helper.MoorActivityProvider"-->
+<!--            android:authorities="${applicationId}.manager.MoorActivityProvider"-->
+<!--            android:exported="false"-->
+<!--            android:multiprocess="true" />-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/moor_file_paths" />
+        </provider>
+
+        <activity android:name="com.moor.imkf.demo.activity.MoorBaseActivity" />
+        <activity
+            android:name="com.moor.imkf.demo.activity.MoorImagePreviewActivity"
+            android:theme="@style/moor_Theme.ImagePreview" />
+
+        <activity android:name="com.moor.imkf.demo.activity.MoorImageViewerActivity" />
+
+        <activity
+            android:name="com.moor.imkf.demo.activity.MoorChatActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".activity.MoorVideoActivity"/>
+    </application>
+
+</manifest>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sl_tag"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:moor_bindTextView="@+id/tv_title"
+    app:moor_cornerRadius="17.5dp"
+    app:moor_layoutBackground="@color/moor_color_ffffff"
+    app:moor_shapeMode="selected"
+    app:moor_strokeColor="@color/moor_color_e7e7e7"
+    app:moor_strokeWith="0.5dp"
+    app:moor_textColor="@color/moor_color_151515">
+
+    <com.moor.imkf.demo.view.MoorAlignTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxEms="14"
+        android:paddingLeft="16dp"
+        android:paddingTop="10dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="10dp"
+        android:textSize="13sp"
+        tools:text="xxssssssssssssssssxx">
+
+    </com.moor.imkf.demo.view.MoorAlignTextView>
+</com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+

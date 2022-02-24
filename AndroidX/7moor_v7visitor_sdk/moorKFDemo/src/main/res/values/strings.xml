@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="moor_logout">注销</string>
+    <string name="moor_title">容联七陌科技有限公司欢迎您使用在线客服</string>
+    <string name="moor_state">xxx为你服务</string>
+    <string name="moor_choose_color">选择颜色</string>
+    <string name="moor_to_artificial">转人工</string>
+    <string name="moor_chat_close">关闭</string>
+    <string name="moor_chat_camera">拍摄</string>
+    <string name="moor_chat_img">图库</string>
+    <string name="moor_chat_evaluate">评价</string>
+    <string name="moor_chat_question">常见问题</string>
+    <string name="moor_chat_file">文件</string>
+    <string name="moor_write_drown_msg">对方撤回了一条消息</string>
+    <string name="moor_no_photo_album">手机中可能没有相册</string>
+    <string name="moor_no_file_manager">手机中可能没有文件管理器</string>
+    <string name="moor_press_record">按住 说话</string>
+    <string name="moor_release_end">松开 发送</string>
+    <string name="moor_release_cancel">松开手指 取消发送</string>
+    <string name="moor_record_to_short">说话时间过短</string>
+    <string name="moor_move_up_cancel">手指上滑 取消发送</string>
+    <string name="moor_record_tolong">说话时间超长</string>
+    <string name="moor_indicator">%1$s/%2$s</string>
+    <string name="moor_btn_original">查看原图</string>
+
+    <string name="moor_toast_start_download">开始下载</string>
+    <string name="moor_toast_load_failed">加载失败</string>
+    <string name="moor_toast_save_failed">保存失败</string>
+    <string name="moor_toast_save_success">成功保存到: </string>
+    <string name="moor_refuse">拒绝</string>
+    <string name="moor_allow">允许</string>
+    <string name="moor_send">发送</string>
+
+    <string name="moor_evaluation_hint">请输入备注内容</string>
+    <string name="moor_evaluation_submit">提交评价</string>
+    <string name="moor_cancel">取消</string>
+
+    <string name="moor_file_sending">上传中...</string>
+    <string name="moor_file_sendok">上传成功</string>
+    <string name="moor_file_sendfailed">上传失败</string>
+    <string name="moor_file_download">未下载</string>
+    <string name="moor_file_look">查看</string>
+
+    <string name="moor_tips_lookmore">查看更多</string>
+    <string name="moor_tips_textsolong">超出字数限制</string>
+
+    <string name="moor_csr_status_failure">评价已失效</string>
+    <string name="moor_csr_status_evaluationed">该会话已评价</string>
+    <string name="moor_csr_status_canevaluate">该会话可以评价</string>
+    <string name="moor_csr_chatrow">满意度评价</string>
+    <string name="moor_csr_chatrow_status_evaluationed">已评价</string>
+    <string name="moor_csr_close_session">会话已结束</string>
+    <string name="moor_csr_isProposalStatus">请填写备注内容</string>
+    <string name="moor_claim_fouyou">为您服务</string>
+    <string name="moor_seat">客服</string>
+    <string name="moor_robot">机器人</string>
+    <string name="moor_system">系统</string>
+    <string name="moor_close_chat_session">结束会话</string>
+    <string name="moor_chat_session_redirect">已为您转接,</string>
+    <string name="moor_robot_feed_back_fingerup">很高兴为您解决了问题！</string>
+    <string name="moor_robot_feed_back_fingerdown">非常抱歉没有解决您的问题！</string>
+    <string name="moor_queue_num_left">您当前排在第</string>
+    <string name="moor_queue_num_right">位,请稍后～</string>
+    <string name="moor_net_error_text">网络不稳定,请重连～</string>
+    <string name="moor_net_error_reclient">立即重连</string>
+    <string name="moor_tip_message">提示</string>
+    <string name="moor_net_error">当前无网络连接</string>
+    <string name="moor_find_your_order">请选择您想要查询的订单</string>
+    <string name="moor_noexpress">暂无物流信息</string>
+    <string name="moor_reselect">重新选择</string>
+
+    <string name="moor_chat_send_ordercard">发送订单</string>
+    <string name="moor_not_suportxbottype">当前渠道不支持卡片</string>
+    <string name="moor_newchat_error">会话创建失败，请重试</string>
+    <string name="moor_chat_please_choosecsrtag">请选择满意度类型</string>
+    <string name="moor_cancel_queue">退出排队</string>
+    <string name="moor_cancel_queue_success">访客已退出排队</string>
+    <string name="moor_withdraw_msg">撤回一条消息</string>
+</resources>

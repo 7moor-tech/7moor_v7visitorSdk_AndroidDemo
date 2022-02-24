@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/moor_color_eeeeee">
+
+
+    <com.moor.imkf.demo.emotion.MoorEmotionPagerView
+        android:id="@+id/ep_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/ll_layout_emoji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="23.5dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="23.5dp">
+
+        <ImageView
+            android:id="@+id/iv_delete_emoji"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:background="@drawable/moor_bg_white_coner_8"
+            android:paddingLeft="15dp"
+            android:paddingTop="9dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="9dp"
+            android:src="@drawable/moor_icon_delete_emoji" />
+
+        <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+            android:id="@+id/sl_send_emoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/moor_left_margin_10"
+            app:moor_cornerRadius="8dp"
+            app:moor_layoutBackground="@color/moor_color_ffffff"
+            app:moor_shapeMode="pressed">
+
+            <TextView
+                android:id="@+id/tv_send_emoji"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:text="@string/moor_send"
+                android:textColor="@color/moor_color_4d999999"
+                android:textSize="14sp"
+                android:visibility="visible" />
+        </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/moor_bg_recorder"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/dialog_recorder_iv_rd"
+            android:layout_width="60dp"
+            android:layout_height="90dp"
+            android:src="@drawable/moor_recorder"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/dialog_recorder_iv_voice"
+            android:layout_width="60dp"
+            android:layout_height="90dp"
+            android:layout_toRightOf="@id/dialog_recorder_iv_rd"
+            android:src="@drawable/moor_v1"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/dialog_recorder_tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/moor_color_ffffff"
+            android:textSize="60sp"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/dialog_recorder_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="15sp"
+        android:text="@string/moor_move_up_cancel"
+        android:textColor="@color/moor_color_ffffff" />
+
+</LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/background"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:moor_cornerRadius="10dp"
+    app:moor_shadowColor="@color/moor_color_338f8f8f"
+    app:moor_shadowLimit="20dp"
+    app:moor_shadowOffsetX="0dp"
+    app:moor_shadowOffsetY="0dp">
+
+    <com.moor.imkf.demo.view.loading.MoorLoadingView
+        android:id="@+id/container"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@color/moor_color_ffffff" />
+</com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>

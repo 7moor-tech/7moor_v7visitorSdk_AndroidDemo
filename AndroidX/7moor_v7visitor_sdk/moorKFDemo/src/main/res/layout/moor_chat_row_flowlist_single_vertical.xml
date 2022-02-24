@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_main"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.moor.imkf.demo.view.MoorMaxWidthLinearLayout
+        android:id="@+id/ll_flow_list_text"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:id="@+id/ll_flow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rl_robot_flowlist"
+            android:layout_width="240dp"
+            android:layout_height="200dp"
+            android:paddingLeft="@dimen/moor_chat_msg_padding_left_right"
+            android:paddingRight="@dimen/moor_chat_msg_padding_left_right"
+            android:paddingBottom="5dp" />
+
+
+        <com.moor.imkf.demo.view.pagergrid.MoorPointBottomView
+            android:id="@+id/pbv_flow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            app:moor_circleInterval="10dp"
+            app:moor_fillColor="@color/moor_color_0081ff"
+            app:moor_point_strokeColor="@color/moor_color_f5f6f7"
+            app:moor_radius="2.5dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

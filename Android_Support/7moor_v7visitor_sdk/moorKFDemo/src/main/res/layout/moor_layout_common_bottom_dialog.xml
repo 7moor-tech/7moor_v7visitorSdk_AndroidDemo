@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/moor_bg_common_bottom_sheet">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"
+            android:text="@string/moor_tip_message"
+            android:textColor="@color/moor_color_333333"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_bottom_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:padding="10dp"
+            android:src="@drawable/moor_icon_dialog_close" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/moor_color_ffffff">
+
+        <TextView
+            android:id="@+id/tv_common_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/moor_color_151515"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="标题" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_common_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="35dp">
+
+            <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+                android:id="@+id/sl_common_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/moor_left_margin_10"
+                app:moor_cornerRadius="5dp"
+                app:moor_layoutBackground="@color/moor_color_0081ff"
+                app:moor_layoutBackground_true="@color/moor_color_890081ff"
+                app:moor_shapeMode="pressed">
+
+                <TextView
+                    android:id="@+id/tv_common_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="35dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="35dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/moor_color_ffffff"
+                    android:textSize="15sp"
+                    tools:text="好的" />
+            </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+
+            <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+                android:id="@+id/sl_common_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/moor_left_margin_10"
+                android:layout_toRightOf="@id/sl_common_left"
+                app:moor_cornerRadius="5dp"
+                app:moor_layoutBackground="@color/moor_color_ffffff"
+                app:moor_layoutBackground_true="@color/moor_color_e4e4e4"
+                app:moor_shapeMode="pressed"
+                app:moor_strokeColor="@color/moor_color_e4e4e4"
+                app:moor_strokeWith="0.5dp">
+
+                <TextView
+                    android:id="@+id/tv_common_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="35dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="35dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/moor_color_666666"
+                    android:textSize="15sp"
+                    tools:text="退出" />
+            </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

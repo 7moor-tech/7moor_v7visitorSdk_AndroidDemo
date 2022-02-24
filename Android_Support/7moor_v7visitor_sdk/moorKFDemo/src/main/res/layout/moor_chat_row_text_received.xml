@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:minHeight="@dimen/moor_chat_avatar_size"
+    android:orientation="vertical">
+
+    <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+        android:id="@+id/sl_content_received"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/moor_chat_avatar_size"
+        app:moor_cornerRadius="10dp"
+        app:moor_layoutBackground="@color/moor_color_cee6fc"
+        app:moor_shapeMode="pressed">
+
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                 android:id="@+id/chat_content_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:lineSpacingMultiplier="1.1"
+                android:paddingLeft="@dimen/moor_chat_msg_padding_left_right"
+                android:paddingTop="@dimen/moor_chat_msg_padding_top_bottom"
+                android:paddingRight="@dimen/moor_chat_msg_padding_left_right"
+                android:paddingBottom="@dimen/moor_chat_msg_padding_top_bottom"
+                android:textColor="@color/moor_color_000000"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/moor_text_type_size"
+                tools:text="s" />
+
+            <LinearLayout
+                android:id="@+id/ll_flow_list_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+    </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+
+
+</LinearLayout>

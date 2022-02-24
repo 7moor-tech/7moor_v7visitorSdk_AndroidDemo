@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:src="@mipmap/ykf_main_welcome" />
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_above="@id/bt_init"
+        android:layout_centerHorizontal="true"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Accessid:"
+            android:textSize="14sp"
+            android:textColor="@color/color_02071D"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <EditText
+            android:id="@+id/et_input_accessid"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:hint="Accessid:"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text=""></EditText>
+    </LinearLayout>
+
+
+    <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+        android:id="@+id/bt_init"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
+        android:onClick="initSdk"
+        app:moor_cornerRadius="5dp"
+        app:moor_layoutBackground="@color/color_4FA986"
+        app:moor_layoutBackground_true="@color/moor_color_894FA986"
+        app:moor_shapeMode="pressed">
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/contact_im"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+</RelativeLayout>

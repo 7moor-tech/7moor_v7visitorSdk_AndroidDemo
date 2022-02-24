@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_main"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/moor_bg_in_msg"
+    android:orientation="vertical">
+
+    <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+        android:id="@+id/msl_flow_multi_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:moor_cornerRadius="10dp"
+        app:moor_layoutBackground="@color/moor_color_ffffff">
+
+        <com.moor.imkf.demo.view.MoorMaxWidthLinearLayout
+            android:id="@+id/ll_flow_list_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+</LinearLayout>

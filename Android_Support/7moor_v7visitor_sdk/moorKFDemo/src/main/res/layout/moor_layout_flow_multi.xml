@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+        android:id="@+id/msl_flow_multi_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:moor_cornerRadius="10dp"
+        app:moor_layoutBackground="@color/moor_color_ffffff">
+
+        <com.moor.imkf.demo.view.MoorChildRecyclerView
+            android:id="@+id/rv_flow_multi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingRight="15dp" />
+    </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+
+    <com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout
+        android:id="@+id/msl_flow_multi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:moor_bindTextView="@+id/tv_flow_sure"
+        app:moor_cornerRadius="17.5dp"
+        app:moor_shapeMode="pressed"
+        app:moor_textColor_true="@color/moor_color_80ffffff">
+
+        <TextView
+            android:id="@+id/tv_flow_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingTop="10dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="10dp"
+            android:text="确定(可多选)"
+            android:textColor="@color/moor_color_ffffff"
+            android:textSize="13sp" />
+    </com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout>
+</LinearLayout>

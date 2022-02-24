@@ -1,0 +1,27 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.3'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+
+gradle.ext.versionCode = 5
+gradle.ext.versionName = "1.4.1"
+gradle.ext.compileSdkVersion = 29
+gradle.ext.minSdkVersion = 19
+gradle.ext.targetSdkVersion = 29
