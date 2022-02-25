@@ -26,7 +26,9 @@
 [AndroidX](https://github.com/7moor-tech/7moor_v7visitorSdk_AndroidDemo/tree/main/AndroidX)：Androidx库demo
 
 
-
+## 文档：
+ 
+ 查看每个版本Tag下的集成文档
 
 ## 版本：
 ### V1.4.1（2021-12-08）
