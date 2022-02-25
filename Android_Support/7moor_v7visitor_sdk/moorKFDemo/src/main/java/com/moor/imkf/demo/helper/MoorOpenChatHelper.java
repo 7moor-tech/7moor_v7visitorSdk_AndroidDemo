@@ -4,14 +4,14 @@ import android.content.Intent;
 
 import com.moor.imkf.demo.activity.MoorChatActivity;
 import com.moor.imkf.demo.view.loading.MoorLoadingDialog;
+import com.moor.imkf.lib.utils.MoorLogUtils;
 import com.moor.imkf.moorsdk.bean.MoorEnumErrorCode;
 import com.moor.imkf.moorsdk.events.MoorLoginOffEvent;
 import com.moor.imkf.moorsdk.listener.IMoorInitListener;
+import com.moor.imkf.moorsdk.manager.MoorActivityHolder;
 import com.moor.imkf.moorsdk.manager.MoorConfiguration;
 import com.moor.imkf.moorsdk.manager.MoorManager;
-import com.moor.imkf.moorsdk.service.MoorSocketService;
 import com.moor.imkf.moorsdk.utils.MoorEventBusUtil;
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
 
 /**
  * <pre>
@@ -25,16 +25,15 @@ public class MoorOpenChatHelper {
 
     private MoorLoadingDialog loadingDialog;
 
-
     private MoorOpenChatHelper() {
     }
 
     public static MoorOpenChatHelper getInstance() {
-        return MoorOpenChatHelper.SingletonHolder.sInstance;
+        return MoorOpenChatHelper.SingletonHolder.S_INSTANCE;
     }
 
     private static class SingletonHolder {
-        private static final MoorOpenChatHelper sInstance = new MoorOpenChatHelper();
+        private static final MoorOpenChatHelper S_INSTANCE = new MoorOpenChatHelper();
     }
 
 
@@ -54,17 +53,6 @@ public class MoorOpenChatHelper {
      * @param listener      可根据具体需求，参考{@link MoorOpenChatListener}自定义初始化回调
      */
     public void initSdk(final MoorConfiguration configuration, IMoorInitListener listener) {
-        //        MoorPermissionUtil.checkPermission((AppCompatActivity) MoorActivityHolder.requireCurrentActivity(), new OnRequestCallback() {
-//            @Override
-//            public void requestSuccess() {
-//        if (listener != null) {
-//            MoorManager.getInstance().initMoorSdk(configuration, listener);
-//        } else {
-//            MoorOpenChatListener openChatListener = new MoorOpenChatListener();
-//            MoorManager.getInstance().initMoorSdk(configuration, openChatListener);
-//        }
-//            }
-//        }, MoorPermissionConstants.STORE);
         if (listener == null) {
             listener = new MoorOpenChatListener();
         }
@@ -82,11 +70,6 @@ public class MoorOpenChatHelper {
             loadingDialog = MoorLoadingDialog.create()
                     .setCancellable(false);
             loadingDialog.show();
-        }
-
-        @Override
-        public void onStartService() {
-            MoorSocketService.startMoorSocketService(MoorActivityHolder.getCurrentActivity());
         }
 
         @Override
@@ -112,6 +95,5 @@ public class MoorOpenChatHelper {
         Intent intent = new Intent();
         intent.setClass(MoorActivityHolder.requireCurrentActivity(), MoorChatActivity.class);
         MoorActivityHolder.requireCurrentActivity().startActivity(intent);
-
     }
 }

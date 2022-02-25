@@ -1,5 +1,8 @@
 package com.moor.imkf.demo.view.flexbox;
 
+import static android.support.v7.widget.LinearLayoutManager.INVALID_OFFSET;
+import static android.support.v7.widget.RecyclerView.NO_POSITION;
+
 import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -18,9 +21,6 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.support.v7.widget.LinearLayoutManager.INVALID_OFFSET;
-import static android.support.v7.widget.RecyclerView.NO_POSITION;
 
 /**
  * LayoutManager for the {@link RecyclerView}. This class is intended to be used within a

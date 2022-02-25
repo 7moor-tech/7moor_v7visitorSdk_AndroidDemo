@@ -63,10 +63,6 @@ public class MoorImageReceivedViewBinder extends MoorBaseReceivedViewBinder<Moor
         holder.setData(item, items);
     }
 
-    @Override
-    protected void onBindContentViewHolder(@NonNull ViewHolder holder, @NonNull MoorMsgBean item, @NonNull List<Object> payloads) {
-
-    }
 
     @Override
     protected void onBaseViewRecycled(@NonNull ViewHolder holder) {

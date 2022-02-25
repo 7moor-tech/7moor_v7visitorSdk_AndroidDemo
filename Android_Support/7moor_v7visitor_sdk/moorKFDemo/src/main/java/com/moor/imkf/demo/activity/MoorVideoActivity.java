@@ -1,6 +1,5 @@
 package com.moor.imkf.demo.activity;
 
-import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,13 +14,13 @@ import android.widget.VideoView;
 
 import com.moor.imkf.demo.R;
 import com.moor.imkf.demo.constans.MoorDemoConstants;
-import com.moor.imkf.demo.utils.MoorStatusBarUtil;
+import com.moor.imkf.demo.utils.statusbar.MoorStatusBarUtil;
+import com.moor.imkf.lib.constants.MoorPathConstants;
+import com.moor.imkf.lib.http.donwload.IMoorFileDownLoadListener;
+import com.moor.imkf.lib.http.donwload.MoorSdkFileUtils;
+import com.moor.imkf.lib.utils.MoorLogUtils;
+import com.moor.imkf.lib.utils.MoorSdkVersionUtil;
 import com.moor.imkf.moorhttp.MoorHttpUtils;
-import com.moor.imkf.moorsdk.constants.MoorPathConstants;
-import com.moor.imkf.moorsdk.listener.IMoorFileDownLoadListener;
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
-import com.moor.imkf.moorsdk.utils.MoorSdkFileUtils;
-import com.moor.imkf.moorsdk.utils.MoorSdkVersionUtil;
 import com.moor.imkf.moorsdk.utils.MoorUtils;
 
 import java.io.File;
@@ -56,7 +55,7 @@ public class MoorVideoActivity extends AppCompatActivity {
 
         video_url=getIntent().getStringExtra(MoorDemoConstants.MOOR_VIDEO_PATH);
 
-        if (MoorSdkVersionUtil.over_29()) {
+        if (MoorSdkVersionUtil.over29()) {
             assert MoorUtils.getApp() != null;
             dirStr = MoorUtils.getApp().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + File.separator + "moor";
 

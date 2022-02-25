@@ -76,8 +76,7 @@ public class GlideImageLoader implements IMoorImageLoader {
                     .apply(options)
                     .into(imageView);
         } else {
-            options.placeholder(R.drawable.moor_pic_thumb_bg)
-                    .dontAnimate();
+            options.dontAnimate();
             if (width != 0 && height != 0) {
                 options.override(width, height);
             }

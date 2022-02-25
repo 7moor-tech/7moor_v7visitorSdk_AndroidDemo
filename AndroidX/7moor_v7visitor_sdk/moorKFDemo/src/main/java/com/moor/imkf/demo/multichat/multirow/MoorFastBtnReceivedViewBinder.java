@@ -22,7 +22,6 @@ import com.moor.imkf.moorsdk.bean.MoorMsgBean;
 import com.moor.imkf.moorsdk.bean.MoorOptions;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MoorFastBtnReceivedViewBinder extends MoorBaseReceivedViewBinder<MoorMsgBean, MoorFastBtnReceivedViewBinder.ViewHolder> {
     private final MoorOptions options;
@@ -69,16 +68,6 @@ public class MoorFastBtnReceivedViewBinder extends MoorBaseReceivedViewBinder<Mo
             holder.getParent().llBottomContentMatch.removeAllViews();
             holder.getParent().llBottomContentMatch.addView(rlRobotFlowlist);
         }
-
-    }
-
-    @Override
-    protected void onBindContentViewHolder(@NonNull ViewHolder holder, @NonNull MoorMsgBean item, @NonNull List<Object> payloads) {
-
-    }
-
-    @Override
-    protected void onBaseViewRecycled(@NonNull ViewHolder holder) {
 
     }
 

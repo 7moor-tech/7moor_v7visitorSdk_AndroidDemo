@@ -65,11 +65,6 @@ public class MoorTextSendViewBinder extends MoorBaseSendViewBinder<MoorMsgBean, 
 
     }
 
-    @Override
-    protected void onBaseViewRecycled(@NonNull ViewHolder holder) {
-
-    }
-
     static class ViewHolder extends MoorBaseSendHolder {
         TextView chatContentTv;
         MoorShadowLayout slContentSend;

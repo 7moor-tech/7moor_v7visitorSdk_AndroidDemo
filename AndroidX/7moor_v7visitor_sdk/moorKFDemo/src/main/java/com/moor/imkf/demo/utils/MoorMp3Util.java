@@ -3,7 +3,7 @@ package com.moor.imkf.demo.utils;
 import android.media.MediaPlayer;
 import android.text.TextUtils;
 
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
+import com.moor.imkf.lib.utils.MoorLogUtils;
 
 import java.io.IOException;
 

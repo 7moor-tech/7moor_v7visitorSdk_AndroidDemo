@@ -21,8 +21,6 @@ import com.moor.imkf.moorsdk.bean.MoorMsgBean;
 import com.moor.imkf.moorsdk.bean.MoorOptions;
 import com.moor.imkf.moorsdk.utils.MoorUtils;
 
-import java.util.List;
-
 /**
  * <pre>
  *     @author : Trial
@@ -52,16 +50,6 @@ public class MoorFileReceivedViewBinder extends MoorBaseReceivedViewBinder<MoorM
         holder.rlFileRootView.setLayoutParams(layoutParams);
 
         holder.setData(item);
-    }
-
-    @Override
-    protected void onBindContentViewHolder(@NonNull ViewHolder holder, @NonNull MoorMsgBean item, @NonNull List<Object> payloads) {
-
-    }
-
-    @Override
-    protected void onBaseViewRecycled(@NonNull ViewHolder holder) {
-
     }
 
     class ViewHolder extends MoorBaseReceivedHolder {

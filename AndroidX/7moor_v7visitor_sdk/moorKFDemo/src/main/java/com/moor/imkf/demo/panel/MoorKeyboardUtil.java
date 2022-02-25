@@ -14,9 +14,9 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 
 import com.moor.imkf.demo.R;
-import com.moor.imkf.demo.utils.MoorStatusBarUtil;
 import com.moor.imkf.demo.utils.MoorViewUtil;
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
+import com.moor.imkf.demo.utils.statusbar.MoorStatusBarUtil;
+import com.moor.imkf.lib.utils.MoorLogUtils;
 
 /**
  * <pre>
@@ -59,14 +59,14 @@ public class MoorKeyboardUtil {
 
         lastSaveKeyboardHeight = keyboardHeight;
 
-        return MoorKeyBoardSharedPreferences.save(context, keyboardHeight);
+        return MoorKeyBoardSharedPreferences.saveKeyBoardHeight(context, keyboardHeight);
     }
 
 
     public static int getKeyboardHeight(final Context context) {
         if (lastSaveKeyboardHeight == 0) {
             lastSaveKeyboardHeight = MoorKeyBoardSharedPreferences
-                    .get(context, getMinPanelHeight(context.getResources()));
+                    .getKeyBoardHeight(context, getMinPanelHeight(context.getResources()));
         }
 
         return lastSaveKeyboardHeight;
@@ -153,6 +153,9 @@ public class MoorKeyboardUtil {
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public static void detach(Activity activity) {
+        if (activity==null) {
+            return;
+        }
         ViewGroup contentView = activity.findViewById(android.R.id.content);
         contentView.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
         globalLayoutListener = null;

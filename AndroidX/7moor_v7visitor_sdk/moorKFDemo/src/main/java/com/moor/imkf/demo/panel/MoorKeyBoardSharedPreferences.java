@@ -20,15 +20,15 @@ public class MoorKeyBoardSharedPreferences {
 
     private static volatile SharedPreferences sp;
 
-    public static boolean save(final Context context, final int keyboardHeight) {
+    public static boolean saveKeyBoardHeight(final Context context, final int keyboardHeight) {
         return with(context).edit()
                 .putInt(KEY_KEYBOARD_HEIGHT, keyboardHeight)
                 .commit();
     }
 
-    public static boolean saveScreenHeight(final Context context, final int keyboardHeight) {
+    public static boolean saveScreenHeight(final Context context, final int screenHeight) {
         return with(context).edit()
-                .putInt(KEY_SCREEN_HEIGHT, keyboardHeight)
+                .putInt(KEY_SCREEN_HEIGHT, screenHeight)
                 .commit();
     }
 
@@ -44,7 +44,7 @@ public class MoorKeyBoardSharedPreferences {
         return sp;
     }
 
-    public static int get(final Context context, final int defaultHeight) {
+    public static int getKeyBoardHeight(final Context context, final int defaultHeight) {
         return with(context).getInt(KEY_KEYBOARD_HEIGHT, defaultHeight);
     }
 

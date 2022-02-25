@@ -6,13 +6,13 @@ import android.text.TextUtils;
 import com.moor.imkf.demo.bean.MoorIconUrlBean;
 import com.moor.imkf.demo.constans.MoorDemoConstants;
 import com.moor.imkf.demo.preloader.interfaces.IMoorGroupedDataLoader;
+import com.moor.imkf.lib.constants.MoorPathConstants;
+import com.moor.imkf.lib.http.donwload.IMoorFileDownLoadListener;
+import com.moor.imkf.lib.http.donwload.MoorSdkFileUtils;
 import com.moor.imkf.moorhttp.MoorHttpUtils;
 import com.moor.imkf.moorhttp.MoorUrlManager;
 import com.moor.imkf.moorsdk.bean.MoorOptions;
-import com.moor.imkf.moorsdk.constants.MoorPathConstants;
 import com.moor.imkf.moorsdk.db.MoorOptionsDao;
-import com.moor.imkf.moorsdk.listener.IMoorFileDownLoadListener;
-import com.moor.imkf.moorsdk.utils.MoorSdkFileUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,78 +41,29 @@ public class MoorIconDownloadPreLoader implements IMoorGroupedDataLoader<MoorIco
         final String isEmojiBtnImgUrl = options.getIsEmojiBtnImgUrl();
         String moreFunctionImgUrl = options.getMoreFunctionImgUrl();
         String showKeyboardImgUrl = options.getShowKeyboardImgUrl();
-
         try {
+            saveFile(isEmojiBtnImgUrl, "moor_icon_emoji.png", iconUrlBean);
+            saveFile(moreFunctionImgUrl, "moor_icon_more.png", iconUrlBean);
+            saveFile(showKeyboardImgUrl, "moor_icon_keyboard.png", iconUrlBean);
 
-            if (!TextUtils.isEmpty(isEmojiBtnImgUrl)) {
-                Response emojiRes = MoorHttpUtils
-                        .get()
-                        .url(MoorUrlManager.BASE_IM_URL + isEmojiBtnImgUrl)
-                        .build()
-                        .execute();
-                MoorSdkFileUtils.saveFileSys(emojiRes
-                        , MoorPathConstants.getStoragePath(MoorPathConstants.PATH_NAME_MOOR_DOWNLOAD_FILE)
-                        , "moor_icon_emoji.png", new IMoorFileDownLoadListener() {
-                            @Override
-                            public void onSuccess(File file) {
-                                iconUrlBean.setEmojiUrl(file.getAbsolutePath());
-                            }
+            return iconUrlBean;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return iconUrlBean;
+        }
+    }
 
-                            @Override
-                            public void onFailed() {
-
-                            }
-
-                            @Override
-                            public void onProgress(int progress) {
-
-                            }
-                        });
-            }
-
-            if (!TextUtils.isEmpty(moreFunctionImgUrl)) {
-                Response moreRes = MoorHttpUtils
-                        .get()
-                        .url(MoorUrlManager.BASE_IM_URL + moreFunctionImgUrl)
-                        .build()
-                        .execute();
-                MoorSdkFileUtils.saveFileSys(moreRes
-                        , MoorPathConstants.getStoragePath(MoorPathConstants.PATH_NAME_MOOR_DOWNLOAD_FILE)
-                        , "moor_icon_more.png", new IMoorFileDownLoadListener() {
-                            @Override
-                            public void onSuccess(File file) {
-                                iconUrlBean.setMoreUrl(file.getAbsolutePath());
-//                                Bitmap bitmap = MoorFileUtils.decodeSampledBitmapFromFile(file.getAbsolutePath(), MoorPixelUtil.dp2px(45f), MoorPixelUtil.dp2px(45f));
-//                                Matrix matrix = new Matrix();
-//                                matrix.postRotate(45);
-//                                Bitmap resizeBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-//                                boolean b = saveBmpToPath(resizeBitmap, MoorPathConstants.getStoragePath(MoorPathConstants.PATH_NAME_MOOR_DOWNLOAD_FILE + "/moor_icon_more_rotate.png"));
-//                                if (b) {
-//                                    iconUrlBean.setMoreRotateUrl(MoorPathConstants.getStoragePath(MoorPathConstants.PATH_NAME_MOOR_DOWNLOAD_FILE + "/moor_icon_more_rotate.png"));
-//                                }
-                            }
-
-                            @Override
-                            public void onFailed() {
-
-                            }
-
-                            @Override
-                            public void onProgress(int progress) {
-
-                            }
-                        });
-            }
-
-            if (!TextUtils.isEmpty(showKeyboardImgUrl)) {
+    private void saveFile(String url, String fileName, final MoorIconUrlBean iconUrlBean) {
+        try {
+            if (!TextUtils.isEmpty(url)) {
                 Response keyRes = MoorHttpUtils
                         .get()
-                        .url(MoorUrlManager.BASE_IM_URL + showKeyboardImgUrl)
+                        .url(MoorUrlManager.BASE_IM_URL + url)
                         .build()
                         .execute();
                 MoorSdkFileUtils.saveFileSys(keyRes
                         , MoorPathConstants.getStoragePath(MoorPathConstants.PATH_NAME_MOOR_DOWNLOAD_FILE)
-                        , "moor_icon_keyboard.png", new IMoorFileDownLoadListener() {
+                        , fileName, new IMoorFileDownLoadListener() {
                             @Override
                             public void onSuccess(File file) {
                                 iconUrlBean.setKeyboardUrl(file.getAbsolutePath());
@@ -129,14 +80,9 @@ public class MoorIconDownloadPreLoader implements IMoorGroupedDataLoader<MoorIco
                             }
                         });
             }
-
-            return iconUrlBean;
         } catch (Exception e) {
             e.printStackTrace();
-            return iconUrlBean;
         }
-
-
     }
 
     @Override

@@ -13,7 +13,7 @@ import android.view.View;
 import com.moor.imkf.demo.R;
 import com.moor.imkf.demo.constans.MoorDemoConstants;
 import com.moor.imkf.demo.utils.MoorMediaPlayTools;
-import com.moor.imkf.moorsdk.constants.MoorPathConstants;
+import com.moor.imkf.lib.constants.MoorPathConstants;
 import com.moor.imkf.mp3recorder.MP3Recorder;
 
 import java.lang.ref.WeakReference;

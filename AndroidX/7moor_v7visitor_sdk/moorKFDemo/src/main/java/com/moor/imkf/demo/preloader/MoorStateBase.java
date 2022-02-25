@@ -3,7 +3,7 @@ package com.moor.imkf.demo.preloader;
 
 import com.moor.imkf.demo.preloader.interfaces.IMoorDataListener;
 import com.moor.imkf.demo.preloader.interfaces.IMoorState;
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
+import com.moor.imkf.lib.utils.MoorLogUtils;
 
 
 /**

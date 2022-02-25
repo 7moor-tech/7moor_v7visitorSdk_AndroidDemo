@@ -5,11 +5,12 @@ import android.content.res.Configuration;
 import android.graphics.Point;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.util.DisplayMetrics;
+
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.moor.imkf.moorsdk.utils.MoorSdkVersionUtil;
+import com.moor.imkf.lib.utils.MoorDensityUtil;
+import com.moor.imkf.lib.utils.MoorSdkVersionUtil;
 
 /**
  * <pre>
@@ -19,29 +20,13 @@ import com.moor.imkf.moorsdk.utils.MoorSdkVersionUtil;
  *     @version: 1.0
  * </pre>
  */
-public class MoorScreenUtils {
+public class MoorScreenUtils extends MoorDensityUtil {
     private static final int PORTRAIT = 0;
     private static final int LANDSCAPE = 1;
     private volatile static boolean mHasCheckAllScreen;
     private volatile static boolean mIsAllScreenDevice;
     @NonNull
     private static final Point[] mRealSizes = new Point[2];
-
-    public static int getScreenWidth(Context context) {
-        DisplayMetrics metric = new DisplayMetrics();
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        wm.getDefaultDisplay().getMetrics(metric);
-
-        return metric.widthPixels;
-    }
-
-    public static int getScreenWidthOrHeight(Context context) {
-        DisplayMetrics metric = new DisplayMetrics();
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        wm.getDefaultDisplay().getMetrics(metric);
-
-        return Math.min(metric.widthPixels, metric.heightPixels);
-    }
 
     private static int getScreenRealHeight(@Nullable Context context) {
 
@@ -61,22 +46,12 @@ public class MoorScreenUtils {
         return mRealSizes[orientation].y;
     }
 
+
     public static int getFullActivityHeight(@Nullable Context context) {
         if (!isAllScreenDevice(context)) {
             return getScreenHeight(context);
         }
         return getScreenRealHeight(context);
-    }
-
-    public static int getScreenHeight(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics metric = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(metric);
-        return metric.heightPixels;
-    }
-
-    public static float getPhoneRatio(Context context) {
-        return ((float) getScreenHeight(context)) / ((float) getScreenWidth(context));
     }
     private static boolean isAllScreenDevice(Context context) {
         if (mHasCheckAllScreen) {
@@ -85,7 +60,7 @@ public class MoorScreenUtils {
         mHasCheckAllScreen = true;
         mIsAllScreenDevice = false;
         // 低于 API 21的，都不会是全面屏。。。
-        if (MoorSdkVersionUtil.over_21()) {
+        if (MoorSdkVersionUtil.over21()) {
             WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
             if (windowManager != null) {
                 Display display = windowManager.getDefaultDisplay();

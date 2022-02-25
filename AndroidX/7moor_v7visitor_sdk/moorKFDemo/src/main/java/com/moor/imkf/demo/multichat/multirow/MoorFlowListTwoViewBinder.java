@@ -118,16 +118,6 @@ public class MoorFlowListTwoViewBinder extends MoorBaseReceivedViewBinder<MoorMs
         });
     }
 
-    @Override
-    protected void onBindContentViewHolder(@NonNull ViewHolder holder, @NonNull MoorMsgBean item, @NonNull List<Object> payloads) {
-
-    }
-
-    @Override
-    protected void onBaseViewRecycled(@NonNull ViewHolder holder) {
-
-    }
-
     static class ViewHolder extends MoorBaseReceivedHolder {
 
         MoorPointBottomView pbvFlow;

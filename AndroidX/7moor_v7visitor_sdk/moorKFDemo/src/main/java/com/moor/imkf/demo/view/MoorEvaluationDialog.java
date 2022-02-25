@@ -27,19 +27,20 @@ import com.moor.imkf.demo.adapter.MoorTagSelectAdapter;
 import com.moor.imkf.demo.bean.MoorEvaluation;
 import com.moor.imkf.demo.bean.MoorEvaluationBean;
 import com.moor.imkf.demo.listener.IMoorOnClickEvaListener;
-import com.moor.imkf.demo.utils.MoorAntiShakeUtils;
 import com.moor.imkf.demo.utils.MoorColorUtils;
 import com.moor.imkf.demo.utils.MoorPixelUtil;
 import com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout;
+import com.moor.imkf.lib.http.callback.MoorBaseCallBack;
+import com.moor.imkf.lib.utils.MoorAntiShakeUtils;
 import com.moor.imkf.moorhttp.MoorHttpParams;
 import com.moor.imkf.moorhttp.MoorHttpUtils;
 import com.moor.imkf.moorhttp.MoorUrlManager;
-import com.moor.imkf.moorhttp.callback.MoorBaseCallBack;
 import com.moor.imkf.moorsdk.bean.MoorCheckCsrStatusBean;
 import com.moor.imkf.moorsdk.bean.MoorNetBaseBean;
 import com.moor.imkf.moorsdk.bean.MoorOptions;
 import com.moor.imkf.moorsdk.manager.MoorManager;
 import com.moor.imkf.moorsdk.utils.toast.MoorToastUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -9,6 +9,7 @@ import android.view.WindowManager;
 
 import com.moor.imkf.demo.constans.MoorDemoConstants;
 import com.moor.imkf.demo.panel.MoorKeyboardUtil;
+import com.moor.imkf.demo.utils.statusbar.MoorStatusBarUtil;
 
 /**
  * <pre>

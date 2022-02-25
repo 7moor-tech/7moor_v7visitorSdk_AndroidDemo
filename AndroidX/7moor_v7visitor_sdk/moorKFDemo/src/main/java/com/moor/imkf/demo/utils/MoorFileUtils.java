@@ -15,8 +15,8 @@ import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
 
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
-import com.moor.imkf.moorsdk.utils.MoorSdkVersionUtil;
+import com.moor.imkf.lib.utils.MoorLogUtils;
+import com.moor.imkf.lib.utils.MoorSdkVersionUtil;
 import com.moor.imkf.moorsdk.utils.MoorUtils;
 import com.moor.imkf.moorsdk.utils.toast.MoorToastUtils;
 
@@ -220,10 +220,10 @@ public class MoorFileUtils {
             return "";
         }
         //Android Q 文件 URI-file单独处理
-        if (MoorSdkVersionUtil.over_29()) {
+        if (MoorSdkVersionUtil.over29()) {
             return getFilePathFromUri_Q(uri);
         }
-        if (MoorSdkVersionUtil.over_19() && DocumentsContract.isDocumentUri(context, uri)) {
+        if (MoorSdkVersionUtil.over19() && DocumentsContract.isDocumentUri(context, uri)) {
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
@@ -272,7 +272,7 @@ public class MoorFileUtils {
                 return getDataColumn(context, contentUri, selection, selectionArgs);
             }
         } else if ("content".equalsIgnoreCase(uri.getScheme())) {
-            if (MoorSdkVersionUtil.over_24()) {
+            if (MoorSdkVersionUtil.over24()) {
                 return getFilePathForN(uri, context);
             } else {
                 return getDataColumn(context, uri, null, null);
@@ -459,7 +459,7 @@ public class MoorFileUtils {
      * @return
      */
     public static boolean saveImage(Context context, File sourceFile) {
-        if (MoorSdkVersionUtil.over_29()) {
+        if (MoorSdkVersionUtil.over29()) {
             ContentValues values = new ContentValues();
             values.put(MediaStore.Images.Media.DISPLAY_NAME, "moor" + System.currentTimeMillis() + ".jpg");
             values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg");
@@ -565,7 +565,7 @@ public class MoorFileUtils {
      * @return
      */
     public static boolean saveFile(Context context, File sourceFile, String fileName) {
-        if (MoorSdkVersionUtil.over_29()) {
+        if (MoorSdkVersionUtil.over29()) {
             ContentValues values = new ContentValues();
             values.put(MediaStore.Downloads.DISPLAY_NAME, fileName);
             values.put(MediaStore.Downloads.MIME_TYPE, MoorFileFormatUtils.getFormatName(fileName));
@@ -651,5 +651,27 @@ public class MoorFileUtils {
             }
         }
         return result;
+    }
+
+    /**
+     * 获取文件目录File对象
+     *
+     * @param folderPath 存放的文件夹名称
+     * @param childPath  创建子文件夹名称
+     * @param fileName   要创建的文件名称
+     */
+    public static File getDownloadFile(String folderPath, String childPath, String fileName) {
+        String fileDir = "";
+        if (TextUtils.isEmpty(childPath)) {
+            fileDir = folderPath;
+        } else {
+            fileDir = folderPath + childPath + File.separator;
+        }
+        File dir = new File(fileDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        return new File(dir, fileName);
     }
 }

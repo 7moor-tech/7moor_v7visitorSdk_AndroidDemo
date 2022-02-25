@@ -8,7 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.moor.imkf.demo.R;
-import com.moor.imkf.demo.helper.MoorActivityHolder;
+import com.moor.imkf.moorsdk.manager.MoorActivityHolder;
 
 /**
  * <pre>

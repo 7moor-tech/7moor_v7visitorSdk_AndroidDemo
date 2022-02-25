@@ -8,8 +8,8 @@ import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.moor.imkf.demo.utils.MoorStatusBarUtil;
 import com.moor.imkf.demo.utils.MoorViewUtil;
+import com.moor.imkf.demo.utils.statusbar.MoorStatusBarUtil;
 
 /**
  * <pre>

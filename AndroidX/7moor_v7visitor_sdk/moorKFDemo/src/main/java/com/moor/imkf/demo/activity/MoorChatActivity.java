@@ -1,19 +1,19 @@
 package com.moor.imkf.demo.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.moor.imkf.demo.R;
-import com.moor.imkf.demo.constans.MoorDemoConstants;
 import com.moor.imkf.demo.data.MoorEmojiPreLoader;
 import com.moor.imkf.demo.data.MoorEvaluationsPreLoader;
 import com.moor.imkf.demo.data.MoorIconDownloadPreLoader;
 import com.moor.imkf.demo.data.MoorMsgPreLoader;
 import com.moor.imkf.demo.fragment.MoorChatFragment;
+import com.moor.imkf.demo.panel.MoorKeyBoardSharedPreferences;
 import com.moor.imkf.demo.preloader.MoorPreLoader;
-import com.moor.imkf.demo.utils.MoorStatusBarUtil;
-import com.moor.imkf.moorsdk.utils.MoorSdkVersionUtil;
+import com.moor.imkf.demo.utils.MoorScreenUtils;
+import com.moor.imkf.demo.utils.statusbar.MoorStatusBarUtil;
 
 /**
  * <pre>
@@ -23,12 +23,16 @@ import com.moor.imkf.moorsdk.utils.MoorSdkVersionUtil;
  *     @version: 1.0
  * </pre>
  */
-public class MoorChatActivity extends MoorBaseActivity {
+public class MoorChatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.moor_fragment_chat);
+        //存储屏幕高度
+        int screenHeight = MoorScreenUtils.getFullActivityHeight(this);
+        MoorKeyBoardSharedPreferences.saveScreenHeight(this, screenHeight);
+        //设置状态栏
         MoorStatusBarUtil.setTranslucentStatus(this);
         if (!MoorStatusBarUtil.setStatusBarDarkTheme(this, true)) {
             //如果不支持设置深色风格,设置状态栏颜色为半透明
@@ -38,8 +42,6 @@ public class MoorChatActivity extends MoorBaseActivity {
     }
 
     private void initView() {
-        //添加 Chat聊天页面Fragment
-        MoorChatFragment moorChatFragment = new MoorChatFragment();
         //预加载数据
         int preLoaderId = MoorPreLoader.preLoad(
                 new MoorEmojiPreLoader()
@@ -47,31 +49,9 @@ public class MoorChatActivity extends MoorBaseActivity {
                 , new MoorIconDownloadPreLoader()
                 , new MoorEvaluationsPreLoader());
 
-        Bundle bundle = new Bundle();
-        bundle.putInt(MoorDemoConstants.MOOR_PRE_LOADER_ID, preLoaderId);
-        moorChatFragment.setArguments(bundle);
-
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.moor_framechat, moorChatFragment)
+                .add(R.id.moor_chat, MoorChatFragment.newInstance(preLoaderId))
                 .commit();
     }
-
-
-    @Override
-    public void onBackPressed() {
-        if (MoorSdkVersionUtil.over_29()) {
-            finishAfterTransition();
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-
 }

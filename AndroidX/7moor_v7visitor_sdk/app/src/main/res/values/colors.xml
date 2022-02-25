@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_02071D">#02071D</color>
-    <color name="color_cccccc">#cccccc</color>
-    <color name="color_0081FF">#0081FF</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="color_4FA986">#4FA986</color>
     <color name="moor_color_894FA986">#e64FA986</color>
 

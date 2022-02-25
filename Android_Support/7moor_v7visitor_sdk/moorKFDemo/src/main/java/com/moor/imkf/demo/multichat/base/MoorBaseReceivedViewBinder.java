@@ -56,9 +56,11 @@ public abstract class MoorBaseReceivedViewBinder
      */
     protected abstract void onBindContentViewHolder(@NonNull VH holder, @NonNull T item);
 
-    protected abstract void onBindContentViewHolder(@NonNull VH holder, @NonNull T item, @NonNull List<Object> payloads);
+    protected void onBindContentViewHolder(@NonNull VH holder, @NonNull T item, @NonNull List<Object> payloads) {
+    }
 
-    protected abstract void onBaseViewRecycled(@NonNull VH holder);
+    protected void onBaseViewRecycled(@NonNull VH holder) {
+    }
 
     @Override
     protected void onViewRecycled(@NonNull MoorBaseReceivedViewBinder.ViewHolder holder) {

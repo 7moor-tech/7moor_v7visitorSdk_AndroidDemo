@@ -15,13 +15,13 @@ import android.widget.LinearLayout;
 import com.moor.imkf.demo.R;
 import com.moor.imkf.demo.view.photoview.MoorPhotoView;
 
-
 /**
- * @author 工藤
- * @email qinglingou@gmail.com
- * com.fan16.cn.widget.ninegrid
- * create at 2018/10/19  11:22
- * description:辅助下拉关闭图片
+ * <pre>
+ *     @author : Trial
+ *     @time   : 2/23/21
+ *     @desc   : 辅助下拉关闭图片
+ *     @version: 1.0
+ * </pre>
  */
 public class MoorFingerDragHelper extends LinearLayout {
 

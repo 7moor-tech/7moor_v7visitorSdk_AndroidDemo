@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -29,12 +30,12 @@ import com.moor.imkf.demo.view.imageviewer.MoorHackyViewPager;
 import com.moor.imkf.demo.view.imageviewer.MoorImagePreview;
 import com.moor.imkf.demo.view.imageviewer.subscaleview.MoorSubsamplingScaleImageView;
 import com.moor.imkf.demo.view.photoview.MoorPhotoView;
+import com.moor.imkf.lib.utils.MoorLogUtils;
+import com.moor.imkf.lib.utils.MoorSdkVersionUtil;
 import com.moor.imkf.moorhttp.MoorHttpUtils;
 import com.moor.imkf.moorsdk.bean.MoorImageInfoBean;
 import com.moor.imkf.moorsdk.listener.IMoorImageLoaderListener;
 import com.moor.imkf.moorsdk.manager.MoorManager;
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
-import com.moor.imkf.moorsdk.utils.MoorSdkVersionUtil;
 import com.moor.imkf.moorsdk.utils.toast.MoorToastUtils;
 
 import java.io.File;
@@ -50,7 +51,7 @@ import java.util.Map;
  *     @version: 1.0
  * </pre>
  */
-public class MoorImagePreviewActivity extends MoorBaseActivity implements View.OnClickListener {
+public class MoorImagePreviewActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private List<MoorImageInfoBean> imageInfoList;
@@ -85,13 +86,13 @@ public class MoorImagePreviewActivity extends MoorBaseActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.moor_layout_image_preview);
-        if (MoorSdkVersionUtil.over_21()) {
+        if (MoorSdkVersionUtil.over21()) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
-        } else if (MoorSdkVersionUtil.over_19()) {
+        } else if (MoorSdkVersionUtil.over19()) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
 

@@ -6,14 +6,14 @@ import com.moor.imkf.demo.constans.MoorDemoConstants;
 import com.moor.imkf.demo.preloader.interfaces.IMoorGroupedDataLoader;
 import com.moor.imkf.demo.utils.MoorEmojiBitmapUtil;
 import com.moor.imkf.demo.utils.MoorFileUtils;
+import com.moor.imkf.lib.constants.MoorPathConstants;
+import com.moor.imkf.lib.http.donwload.MoorSdkFileUtils;
+import com.moor.imkf.lib.utils.sharedpreferences.MoorSPUtils;
 import com.moor.imkf.moorhttp.MoorHttpUtils;
 import com.moor.imkf.moorhttp.MoorUrlManager;
 import com.moor.imkf.moorsdk.bean.MoorEmotion;
 import com.moor.imkf.moorsdk.constants.MoorConstants;
-import com.moor.imkf.moorsdk.constants.MoorPathConstants;
 import com.moor.imkf.moorsdk.db.MoorEmojiDao;
-import com.moor.imkf.moorsdk.utils.MoorSPUtils;
-import com.moor.imkf.moorsdk.utils.MoorSdkFileUtils;
 
 import org.json.JSONObject;
 

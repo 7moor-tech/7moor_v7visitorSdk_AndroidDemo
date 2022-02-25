@@ -1,8 +1,7 @@
 <resources>
-
     <style name="Theme.Demo" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/color_0081FF</item>
+        <item name="colorAccent">@color/color_4FA986</item>
     </style>
 </resources>

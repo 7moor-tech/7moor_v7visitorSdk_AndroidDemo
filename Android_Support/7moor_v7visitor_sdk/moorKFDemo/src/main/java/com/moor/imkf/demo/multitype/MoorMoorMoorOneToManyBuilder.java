@@ -1,9 +1,9 @@
 package com.moor.imkf.demo.multitype;
 
+import static com.moor.imkf.demo.multitype.MoorPreconditions.checkNotNull;
+
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
-
-import static com.moor.imkf.demo.multitype.MoorPreconditions.checkNotNull;
 
 /**
  * <pre>

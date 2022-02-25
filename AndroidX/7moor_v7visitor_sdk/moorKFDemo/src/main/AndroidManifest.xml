@@ -2,21 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.moor.imkf.demo">
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <application>
-
-<!--        <provider-->
-<!--            android:name="com.moor.imkf.demo.helper.MoorActivityProvider"-->
-<!--            android:authorities="${applicationId}.manager.MoorActivityProvider"-->
-<!--            android:exported="false"-->
-<!--            android:multiprocess="true" />-->
+    <application android:networkSecurityConfig="@xml/moor_network_security_config">
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -27,7 +18,6 @@
                 android:resource="@xml/moor_file_paths" />
         </provider>
 
-        <activity android:name="com.moor.imkf.demo.activity.MoorBaseActivity" />
         <activity
             android:name="com.moor.imkf.demo.activity.MoorImagePreviewActivity"
             android:theme="@style/moor_Theme.ImagePreview" />

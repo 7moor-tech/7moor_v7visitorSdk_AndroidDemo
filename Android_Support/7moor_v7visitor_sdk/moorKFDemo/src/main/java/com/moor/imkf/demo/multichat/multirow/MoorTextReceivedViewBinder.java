@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,16 +57,6 @@ public class MoorTextReceivedViewBinder extends MoorBaseReceivedViewBinder<MoorM
             }
         }
         holder.setData(item);
-    }
-
-    @Override
-    protected void onBindContentViewHolder(@NonNull ViewHolder holder, @NonNull MoorMsgBean item, @NonNull List<Object> payloads) {
-
-    }
-
-    @Override
-    protected void onBaseViewRecycled(@NonNull ViewHolder holder) {
-
     }
 
     static class ViewHolder extends MoorBaseReceivedHolder {

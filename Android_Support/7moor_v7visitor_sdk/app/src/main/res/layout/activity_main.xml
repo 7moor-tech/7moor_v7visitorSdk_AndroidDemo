@@ -11,32 +11,31 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="160dp"
-        android:src="@mipmap/ykf_main_welcome" />
-
+        android:src="@drawable/ykf_main_welcome" />
 
 
     <LinearLayout
-        android:orientation="vertical"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
         android:layout_above="@id/bt_init"
         android:layout_centerHorizontal="true"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
+
         <TextView
-            android:text="Accessid:"
-            android:textSize="14sp"
-            android:textColor="@color/color_02071D"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
+            android:layout_height="wrap_content"
+            android:text="Accessid:"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
 
         <EditText
             android:id="@+id/et_input_accessid"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp"
-            android:hint="Accessid:"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text=""></EditText>
+            android:layout_marginTop="4dp"
+            android:hint="填写Accessid:"
+            android:text=""
+            android:textSize="14sp" />
     </LinearLayout>
 
 

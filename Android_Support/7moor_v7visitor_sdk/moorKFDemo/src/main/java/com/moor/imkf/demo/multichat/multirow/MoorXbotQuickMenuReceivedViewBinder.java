@@ -11,20 +11,17 @@ import android.widget.LinearLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.moor.imkf.demo.R;
-import com.moor.imkf.demo.adapter.MoorFastBtnHorizontalAdapter;
 import com.moor.imkf.demo.adapter.MoorXbotQuickMenuHorizontalAdapter;
 import com.moor.imkf.demo.bean.MoorEnumChatItemClickType;
 import com.moor.imkf.demo.multichat.base.MoorBaseReceivedHolder;
 import com.moor.imkf.demo.multichat.base.MoorBaseReceivedViewBinder;
 import com.moor.imkf.demo.utils.MoorPixelUtil;
 import com.moor.imkf.demo.view.MoorSpaceItemDecoration;
-import com.moor.imkf.moorsdk.bean.MoorFastBtnBean;
 import com.moor.imkf.moorsdk.bean.MoorMsgBean;
 import com.moor.imkf.moorsdk.bean.MoorOptions;
 import com.moor.imkf.moorsdk.bean.MoorQuickMenuBean;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MoorXbotQuickMenuReceivedViewBinder extends MoorBaseReceivedViewBinder<MoorMsgBean, MoorXbotQuickMenuReceivedViewBinder.ViewHolder> {
     private final MoorOptions options;
@@ -67,16 +64,6 @@ public class MoorXbotQuickMenuReceivedViewBinder extends MoorBaseReceivedViewBin
             holder.getParent().llBottomContentMatch.removeAllViews();
             holder.getParent().llBottomContentMatch.addView(rlRobotFlowlist);
         }
-    }
-
-    @Override
-    protected void onBindContentViewHolder(@NonNull ViewHolder holder, @NonNull MoorMsgBean item, @NonNull List<Object> payloads) {
-
-    }
-
-    @Override
-    protected void onBaseViewRecycled(@NonNull ViewHolder holder) {
-
     }
 
     /*隐藏左侧头像，名称等ui */

@@ -50,11 +50,6 @@ public class MoorOrderListSendViewBinder extends MoorBaseSendViewBinder<MoorMsgB
         holder.setData(item,options);
     }
 
-    @Override
-    protected void onBaseViewRecycled(@NonNull MoorOrderListSendViewBinder.ViewHolder holder) {
-
-    }
-
      class ViewHolder extends MoorBaseSendHolder {
         TextView tv_order_list_title, tv_order_num_name, tv_order_num, tv_order_btn_l, tv_order_btn_r;
         RecyclerView rv_order_list;

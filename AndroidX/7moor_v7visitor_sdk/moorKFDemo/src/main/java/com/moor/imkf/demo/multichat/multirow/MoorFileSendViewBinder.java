@@ -54,11 +54,6 @@ public class MoorFileSendViewBinder extends MoorBaseSendViewBinder<MoorMsgBean, 
 
     }
 
-    @Override
-    protected void onBaseViewRecycled(@NonNull ViewHolder holder) {
-
-    }
-
     class ViewHolder extends MoorBaseSendHolder {
 
         RelativeLayout rlFileRootView;

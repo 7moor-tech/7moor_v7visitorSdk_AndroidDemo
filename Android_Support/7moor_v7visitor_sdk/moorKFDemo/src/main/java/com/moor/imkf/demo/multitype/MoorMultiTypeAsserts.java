@@ -1,11 +1,11 @@
 package com.moor.imkf.demo.multitype;
 
+import static com.moor.imkf.demo.multitype.MoorPreconditions.checkNotNull;
+
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
-
-import static com.moor.imkf.demo.multitype.MoorPreconditions.checkNotNull;
 
 /**
  * <pre>

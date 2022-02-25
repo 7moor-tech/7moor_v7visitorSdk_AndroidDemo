@@ -15,8 +15,6 @@ import com.moor.imkf.moorsdk.bean.MoorOptions;
 import com.moor.imkf.moorsdk.constants.MoorChatMsgType;
 import com.moor.imkf.moorsdk.utils.MoorUtils;
 
-import java.util.List;
-
 /**
  * 接收的系统类型消息
  */
@@ -40,17 +38,6 @@ public class MoorSystemReceivedViewBinder extends MoorBaseReceivedViewBinder<Moo
         gone_baseView(parent_holder);
         holder.setData(item);
     }
-
-    @Override
-    protected void onBindContentViewHolder(@NonNull ViewHolder holder, @NonNull MoorMsgBean item, @NonNull List<Object> payloads) {
-
-    }
-
-    @Override
-    protected void onBaseViewRecycled(@NonNull ViewHolder holder) {
-
-    }
-
 
     /**
      * 隐藏左侧头像，名称等ui

@@ -241,11 +241,6 @@ public class MoorRobotUseFulReceivedViewBinder extends MoorBaseReceivedViewBinde
         }
     }
 
-    @Override
-    protected void onBaseViewRecycled(@NonNull ViewHolder holder) {
-
-    }
-
     static class ViewHolder extends MoorBaseReceivedHolder {
 
         LinearLayout llUsefulRoot;

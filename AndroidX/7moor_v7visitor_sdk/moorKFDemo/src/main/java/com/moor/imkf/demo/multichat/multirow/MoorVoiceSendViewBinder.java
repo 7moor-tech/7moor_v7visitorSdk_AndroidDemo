@@ -33,7 +33,7 @@ import com.moor.imkf.moorsdk.bean.MoorOptions;
  * </pre>
  */
 public class MoorVoiceSendViewBinder extends MoorBaseSendViewBinder<MoorMsgBean, MoorVoiceSendViewBinder.ViewHolder> {
-    MoorMediaPlayTools instance = MoorMediaPlayTools.getInstance();
+    private MoorMediaPlayTools instance = MoorMediaPlayTools.getInstance();
 
     private final MoorOptions options;
 
@@ -73,12 +73,6 @@ public class MoorVoiceSendViewBinder extends MoorBaseSendViewBinder<MoorMsgBean,
         holder.rlVoiceLayout.setLayoutParams(params);
         holder.setData(item);
     }
-
-    @Override
-    protected void onBaseViewRecycled(@NonNull ViewHolder holder) {
-
-    }
-
 
     class ViewHolder extends MoorBaseSendHolder {
         TextView tvItemVoiceLongTime;

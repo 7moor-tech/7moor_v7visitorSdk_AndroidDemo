@@ -7,11 +7,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 
 import com.moor.imkf.demo.R;
-import com.moor.imkf.demo.utils.MoorStatusBarUtil;
+import com.moor.imkf.demo.utils.statusbar.MoorStatusBarUtil;
 import com.moor.imkf.demo.view.photoview.MoorPhotoView;
 import com.moor.imkf.moorsdk.listener.IMoorImageLoaderListener;
 import com.moor.imkf.moorsdk.manager.MoorManager;
@@ -28,7 +29,7 @@ import java.io.File;
  *     @version: 1.0
  * </pre>
  */
-public class MoorImageViewerActivity extends MoorBaseActivity {
+public class MoorImageViewerActivity extends AppCompatActivity {
 
     private MoorPhotoView moorPhotoView;
     private boolean isSaveSuccess;

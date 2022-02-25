@@ -12,7 +12,7 @@ import androidx.core.os.EnvironmentCompat;
 
 import com.moor.imkf.demo.constans.MoorDemoConstants;
 import com.moor.imkf.demo.utils.MoorFileUtils;
-import com.moor.imkf.moorsdk.utils.MoorSdkVersionUtil;
+import com.moor.imkf.lib.utils.MoorSdkVersionUtil;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -70,7 +70,7 @@ public class MoorTakePicturesHelper {
             File photoFile = null;
             Uri photoUri = null;
 
-            if (MoorSdkVersionUtil.over_29()) {
+            if (MoorSdkVersionUtil.over29()) {
                 photoUri = createImageUri(fragment.getContext());
             } else {
                 try {
@@ -81,7 +81,7 @@ public class MoorTakePicturesHelper {
 
                 if (photoFile != null) {
                     mCameraImagePath = photoFile.getAbsolutePath();
-                    if (MoorSdkVersionUtil.over_24()) {
+                    if (MoorSdkVersionUtil.over24()) {
                         //适配Android 7.0文件权限，通过FileProvider创建一个content类型的Uri
                         photoUri = FileProvider.getUriForFile(fragment.getContext(), fragment.getContext().getPackageName() + MoorDemoConstants.MOOR_FILE_PROVIDER, photoFile);
                     } else {

@@ -6,10 +6,9 @@ import android.graphics.BitmapFactory;
 
 import com.moor.imkf.demo.bean.MoorEmojiBean;
 import com.moor.imkf.demo.bean.MoorEmojiListBean;
-import com.moor.imkf.demo.constans.MoorFilePath;
+import com.moor.imkf.lib.constants.MoorPathConstants;
 import com.moor.imkf.moorsdk.bean.MoorEmotion;
 import com.moor.imkf.moorsdk.constants.MoorConstants;
-import com.moor.imkf.moorsdk.constants.MoorPathConstants;
 import com.moor.imkf.moorsdk.db.MoorEmojiDao;
 
 import java.io.BufferedOutputStream;
@@ -63,7 +62,7 @@ public class MoorEmojiBitmapUtil {
                 bit = Bitmap.createBitmap(resBitmap, x, y, countW, countH, null, false);
 
 
-                File file = MoorFilePath.getDownloadFile(MoorPathConstants.getStoragePath(MoorPathConstants.PATH_NAME_MOOR_DOWNLOAD_FILE)
+                File file = MoorFileUtils.getDownloadFile(MoorPathConstants.getStoragePath(MoorPathConstants.PATH_NAME_MOOR_DOWNLOAD_FILE)
                         , "emoji", "moor_emoji_" + moorEmotions.size() + ".png");
                 saveBitmapFile(bit, file);
                 MoorEmotion emotion = new MoorEmotion();
@@ -110,7 +109,7 @@ public class MoorEmojiBitmapUtil {
 
     @SuppressLint("ResourceType")
     private static Bitmap decodeBitmapFromFile() {
-        File file = MoorFilePath.getDownloadFile(MoorPathConstants.getStoragePath(MoorPathConstants.PATH_NAME_MOOR_DOWNLOAD_FILE)
+        File file = MoorFileUtils.getDownloadFile(MoorPathConstants.getStoragePath(MoorPathConstants.PATH_NAME_MOOR_DOWNLOAD_FILE)
                 , "", MoorConstants.PATH_NAME_MOOR_EMOJI_FILE);
         try {
             InputStream inputStream = new FileInputStream(file);

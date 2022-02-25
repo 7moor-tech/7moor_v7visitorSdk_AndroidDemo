@@ -61,7 +61,8 @@ public abstract class MoorBaseSendViewBinder
      */
     protected abstract void onBindContentViewHolder(@NonNull VH holder, @NonNull T item);
 
-    protected abstract void onBaseViewRecycled(@NonNull VH holder);
+    protected void onBaseViewRecycled(@NonNull VH holder) {
+    }
 
     protected GradientDrawable statusDrawable;
 
@@ -86,7 +87,7 @@ public abstract class MoorBaseSendViewBinder
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull final MoorMsgBean item) {
         MoorOptions options = (MoorOptions) MoorManager.getInstance().getOptions();
 
-        if(infoBean==null){
+        if (infoBean == null) {
             infoBean = MoorInfoDao.getInstance().queryInfo();
         }
 
@@ -100,7 +101,7 @@ public abstract class MoorBaseSendViewBinder
                 holder.chattingUploadingPb.setVisibility(View.GONE);
                 holder.uploadState.setVisibility(View.GONE);
                 //设置已读未读
-                setReadStatus(holder,item,options);
+                setReadStatus(holder, item, options);
                 break;
             case MoorChatMsgType.MSG_TYPE_STATUS_FAILURE:
                 holder.chattingUploadingPb.setVisibility(View.GONE);
@@ -211,8 +212,8 @@ public abstract class MoorBaseSendViewBinder
     }
 
 
-    private void setReadStatus(ViewHolder holder, MoorMsgBean item, MoorOptions options){
-        if(infoBean!=null){
+    private void setReadStatus(ViewHolder holder, MoorMsgBean item, MoorOptions options) {
+        if (infoBean != null) {
             if (infoBean.isAgentReadMessage()) {
                 //打开已读未读开关
                 holder.iv_msg_read_status.setVisibility(View.VISIBLE);
@@ -232,7 +233,7 @@ public abstract class MoorBaseSendViewBinder
             } else {
                 holder.iv_msg_read_status.setVisibility(View.GONE);
             }
-        }else{
+        } else {
             holder.iv_msg_read_status.setVisibility(View.GONE);
         }
     }

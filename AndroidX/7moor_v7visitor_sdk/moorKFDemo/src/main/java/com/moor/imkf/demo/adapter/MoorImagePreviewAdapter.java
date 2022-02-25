@@ -20,10 +20,10 @@ import com.moor.imkf.demo.view.imageviewer.listener.IMoorSimpleOnImageEventListe
 import com.moor.imkf.demo.view.imageviewer.subscaleview.MoorImageSource;
 import com.moor.imkf.demo.view.imageviewer.subscaleview.MoorSubsamplingScaleImageView;
 import com.moor.imkf.demo.view.photoview.MoorPhotoView;
+import com.moor.imkf.lib.utils.MoorLogUtils;
 import com.moor.imkf.moorsdk.bean.MoorImageInfoBean;
 import com.moor.imkf.moorsdk.listener.IMoorImageLoaderListener;
 import com.moor.imkf.moorsdk.manager.MoorManager;
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
 
 import java.io.File;
 import java.util.HashMap;

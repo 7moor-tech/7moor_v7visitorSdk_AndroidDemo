@@ -70,6 +70,7 @@
     <string name="moor_reselect">重新选择</string>
 
     <string name="moor_chat_send_ordercard">发送订单</string>
+    <string name="moor_unblock">申请解封</string>
     <string name="moor_not_suportxbottype">当前渠道不支持卡片</string>
     <string name="moor_newchat_error">会话创建失败，请重试</string>
     <string name="moor_chat_please_choosecsrtag">请选择满意度类型</string>

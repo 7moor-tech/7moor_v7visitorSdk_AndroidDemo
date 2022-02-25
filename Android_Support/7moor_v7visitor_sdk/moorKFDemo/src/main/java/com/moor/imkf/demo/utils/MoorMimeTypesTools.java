@@ -5,7 +5,6 @@ import android.content.res.XmlResourceParser;
 import android.text.TextUtils;
 
 import com.moor.imkf.demo.R;
-import com.moor.imkf.demo.bean.MoorMimeTypes;
 
 
 /**

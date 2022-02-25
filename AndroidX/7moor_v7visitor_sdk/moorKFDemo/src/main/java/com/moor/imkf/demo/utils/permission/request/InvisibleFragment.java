@@ -1,5 +1,7 @@
 package com.moor.imkf.demo.utils.permission.request;
 
+import static com.moor.imkf.demo.utils.permission.request.RequestBackgroundLocationPermission.ACCESS_BACKGROUND_LOCATION;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import androidx.annotation.NonNull;
@@ -7,13 +9,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.moor.imkf.demo.utils.permission.MoorPermissionX;
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
+import com.moor.imkf.lib.utils.MoorLogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import static com.moor.imkf.demo.utils.permission.request.RequestBackgroundLocationPermission.ACCESS_BACKGROUND_LOCATION;
 
 
 

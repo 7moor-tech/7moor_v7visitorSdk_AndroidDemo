@@ -3,27 +3,16 @@ package com.moor.imkf.demo.utils;
 import android.content.res.Resources;
 import android.util.TypedValue;
 
+import com.moor.imkf.lib.utils.MoorDensityUtil;
+
 /**
  * <pre>
  *     @author : Trial
  *     @time   : 2/1/21
- *     @desc   : dp、px工具类
+ *     @desc   : MoorDensityUtil
  *     @version: 1.0
  * </pre>
  */
-public class MoorPixelUtil {
+public class MoorPixelUtil extends MoorDensityUtil {
 
-    /**
-     * dp-->px
-     *
-     * @param dp
-     * @return
-     */
-    public static int dp2px(float dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
-    }
-
-    public static float dp2pxF(float dp) {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
-    }
 }

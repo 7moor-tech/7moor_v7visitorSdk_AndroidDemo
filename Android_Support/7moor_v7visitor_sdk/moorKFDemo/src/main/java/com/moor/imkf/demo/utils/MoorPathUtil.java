@@ -2,7 +2,9 @@ package com.moor.imkf.demo.utils;
 
 import android.os.Environment;
 
-import com.moor.imkf.moorsdk.utils.MoorSdkVersionUtil;
+
+import com.moor.imkf.lib.utils.MoorSdkVersionUtil;
+
 
 import java.io.File;
 
@@ -18,7 +20,7 @@ public class MoorPathUtil {
 
     public static String getImageDownLoadPath() {
         String path = "";
-        if (MoorSdkVersionUtil.over_29()) {
+        if (MoorSdkVersionUtil.over29()) {
             path = Environment.DIRECTORY_PICTURES + File.separator + "moor" + File.separator;
         } else {
             path = Environment.getExternalStorageDirectory().getPath() + File.separator + Environment.DIRECTORY_PICTURES + File.separator + "moor" + File.separator;
@@ -31,7 +33,7 @@ public class MoorPathUtil {
 
     public static String getFileDownLoadPath() {
         String path = "";
-        if (MoorSdkVersionUtil.over_29()) {
+        if (MoorSdkVersionUtil.over29()) {
             path = Environment.DIRECTORY_DOWNLOADS + File.separator + "moor" + File.separator;
         } else {
             path = Environment.getExternalStorageDirectory().getPath() + File.separator + Environment.DIRECTORY_DOWNLOADS + File.separator + "moor" + File.separator;

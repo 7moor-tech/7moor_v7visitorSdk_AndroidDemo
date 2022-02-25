@@ -5,8 +5,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 
-import com.moor.imkf.demo.bean.MoorMimeTypes;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 

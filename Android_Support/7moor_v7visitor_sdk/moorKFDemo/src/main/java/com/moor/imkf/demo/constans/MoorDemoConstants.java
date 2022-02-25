@@ -59,6 +59,12 @@ public class MoorDemoConstants {
      * 会话列表局部刷新payload
      */
     public static final String MOOR_PAYLOAD_USEFUL = "MOOR_PAYLOAD_USEFUL";
+    /**
+     * 会话列表局部刷新payload
+     * 发送的文件，发送进度
+     */
+    public static final String MOOR_PAYLOAD_FILE_SEND_PROGRESS = "MOOR_PAYLOAD_FILE_SEND_PROGRESS";
+
 
     // --------onActivityResult---------
     /**

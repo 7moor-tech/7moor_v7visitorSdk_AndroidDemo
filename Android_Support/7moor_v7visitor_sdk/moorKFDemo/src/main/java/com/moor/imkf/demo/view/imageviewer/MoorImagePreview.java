@@ -14,8 +14,8 @@ import com.moor.imkf.demo.view.imageviewer.listener.OnBigImageLongClickListener;
 import com.moor.imkf.demo.view.imageviewer.listener.OnBigImagePageChangeListener;
 import com.moor.imkf.demo.view.imageviewer.listener.OnDownloadClickListener;
 import com.moor.imkf.demo.view.imageviewer.listener.OnOriginProgressListener;
+import com.moor.imkf.lib.utils.MoorLogUtils;
 import com.moor.imkf.moorsdk.bean.MoorImageInfoBean;
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

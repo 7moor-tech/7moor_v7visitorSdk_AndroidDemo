@@ -1,5 +1,8 @@
 package com.moor.imkf.demo.view.pagergrid;
 
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
+import static android.view.View.MeasureSpec.EXACTLY;
+
 import android.annotation.SuppressLint;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -11,9 +14,6 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
-
-import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
-import static android.view.View.MeasureSpec.EXACTLY;
 
 /**
  * <pre>

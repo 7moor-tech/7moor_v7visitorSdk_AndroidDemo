@@ -1,5 +1,9 @@
 package com.moor.imkf.demo.view.flexbox;
 
+import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
+import static com.moor.imkf.demo.view.flexbox.FlexContainer.NOT_SET;
+import static com.moor.imkf.demo.view.flexbox.FlexItem.FLEX_BASIS_PERCENT_DEFAULT;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -12,10 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
-import static com.moor.imkf.demo.view.flexbox.FlexContainer.NOT_SET;
-import static com.moor.imkf.demo.view.flexbox.FlexItem.FLEX_BASIS_PERCENT_DEFAULT;
 
 /**
  * Offers various calculations for Flexbox to use the common logic between the classes such as

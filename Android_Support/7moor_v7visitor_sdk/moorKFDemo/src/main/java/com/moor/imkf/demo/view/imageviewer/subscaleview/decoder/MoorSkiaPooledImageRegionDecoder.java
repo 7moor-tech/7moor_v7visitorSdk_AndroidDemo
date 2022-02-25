@@ -1,5 +1,7 @@
 package com.moor.imkf.demo.view.imageviewer.subscaleview.decoder;
 
+import static android.content.Context.ACTIVITY_SERVICE;
+
 import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -19,7 +21,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.moor.imkf.demo.view.imageviewer.subscaleview.MoorSubsamplingScaleImageView;
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
+import com.moor.imkf.lib.utils.MoorLogUtils;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -33,8 +35,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.regex.Pattern;
-
-import static android.content.Context.ACTIVITY_SERVICE;
 
 /**
  * <p>

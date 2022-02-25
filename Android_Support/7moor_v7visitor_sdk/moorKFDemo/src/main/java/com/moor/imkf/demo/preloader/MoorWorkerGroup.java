@@ -6,7 +6,7 @@ import com.moor.imkf.demo.preloader.interfaces.IMoorDataListener;
 import com.moor.imkf.demo.preloader.interfaces.IMoorGroupedDataListener;
 import com.moor.imkf.demo.preloader.interfaces.IMoorGroupedDataLoader;
 import com.moor.imkf.demo.preloader.interfaces.IWorker;
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
+import com.moor.imkf.lib.utils.MoorLogUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;

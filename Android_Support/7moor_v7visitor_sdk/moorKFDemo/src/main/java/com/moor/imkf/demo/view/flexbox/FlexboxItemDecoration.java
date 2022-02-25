@@ -1,5 +1,7 @@
 package com.moor.imkf.demo.view.flexbox;
 
+import static android.support.v7.widget.RecyclerView.NO_POSITION;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -9,8 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.List;
-
-import static android.support.v7.widget.RecyclerView.NO_POSITION;
 
 /**
  * {@link RecyclerView.ItemDecoration} implementation that can be used as item decorations between

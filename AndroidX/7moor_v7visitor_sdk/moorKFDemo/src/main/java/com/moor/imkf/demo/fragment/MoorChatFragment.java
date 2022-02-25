@@ -1,5 +1,7 @@
 package com.moor.imkf.demo.fragment;
 
+import static com.moor.imkf.demo.multitype.MoorMultiTypeAsserts.assertAllRegistered;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -48,9 +50,7 @@ import com.moor.imkf.demo.bean.MoorTransferAgentEvent;
 import com.moor.imkf.demo.constans.MoorDemoConstants;
 import com.moor.imkf.demo.constans.MoorEnumControlViewState;
 import com.moor.imkf.demo.emotion.MoorEmotionPagerView;
-import com.moor.imkf.demo.helper.MoorActivityHolder;
 import com.moor.imkf.demo.helper.MoorPanelDataHelper;
-import com.moor.imkf.demo.helper.MoorQiNiuUploadHelper;
 import com.moor.imkf.demo.helper.MoorTakePicturesHelper;
 import com.moor.imkf.demo.listener.IMoorBinderClickListener;
 import com.moor.imkf.demo.listener.IMoorEmojiClickListener;
@@ -65,7 +65,6 @@ import com.moor.imkf.demo.panel.MoorSwitchFSPanelLinearLayout;
 import com.moor.imkf.demo.panel.MoorSwitchRootLinearLayout;
 import com.moor.imkf.demo.preloader.MoorPreLoader;
 import com.moor.imkf.demo.preloader.interfaces.IMoorGroupedDataListener;
-import com.moor.imkf.demo.utils.MoorAntiShakeUtils;
 import com.moor.imkf.demo.utils.MoorColorUtils;
 import com.moor.imkf.demo.utils.MoorEmojiBitmapUtil;
 import com.moor.imkf.demo.utils.MoorFileFormatUtils;
@@ -74,10 +73,10 @@ import com.moor.imkf.demo.utils.MoorMediaPlayTools;
 import com.moor.imkf.demo.utils.MoorMimeTypesTools;
 import com.moor.imkf.demo.utils.MoorPixelUtil;
 import com.moor.imkf.demo.utils.MoorScreenUtils;
-import com.moor.imkf.demo.utils.MoorStatusBarUtil;
 import com.moor.imkf.demo.utils.permission.MoorPermissionConstants;
 import com.moor.imkf.demo.utils.permission.MoorPermissionUtil;
 import com.moor.imkf.demo.utils.permission.callback.OnRequestCallback;
+import com.moor.imkf.demo.utils.statusbar.MoorStatusBarUtil;
 import com.moor.imkf.demo.view.MoorBottomLogisticsProgressDialog;
 import com.moor.imkf.demo.view.MoorBottomTabQuestionDialog;
 import com.moor.imkf.demo.view.MoorCommonBottomDialog;
@@ -89,20 +88,24 @@ import com.moor.imkf.demo.view.MoorSpaceItemDecoration;
 import com.moor.imkf.demo.view.audiobutton.MoorAudioRecorderButton;
 import com.moor.imkf.demo.view.loading.MoorLoadingDialog;
 import com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout;
-import com.moor.imkf.moorhttp.IMoorOnDownloadListener;
-import com.moor.imkf.moorhttp.MoorDownLoadUtils;
+import com.moor.imkf.lib.constants.MoorPathConstants;
+import com.moor.imkf.lib.http.builder.MoorPostFormBuilder;
+import com.moor.imkf.lib.http.callback.MoorBaseCallBack;
+import com.moor.imkf.lib.http.donwload.IMoorOnDownloadListener;
+import com.moor.imkf.lib.http.donwload.MoorDownLoadUtils;
+import com.moor.imkf.lib.jobqueue.base.JobManager;
+import com.moor.imkf.lib.utils.MoorAntiShakeUtils;
+import com.moor.imkf.lib.utils.MoorLogUtils;
+import com.moor.imkf.lib.utils.sharedpreferences.MoorSPUtils;
 import com.moor.imkf.moorhttp.MoorHttpParams;
 import com.moor.imkf.moorhttp.MoorHttpUtils;
 import com.moor.imkf.moorhttp.MoorUrlManager;
-import com.moor.imkf.moorhttp.builder.MoorPostFormBuilder;
-import com.moor.imkf.moorhttp.callback.MoorBaseCallBack;
 import com.moor.imkf.moorhttp.httpparse.MoorHttpParse;
 import com.moor.imkf.moorsdk.bean.MoorBottomBtnBean;
 import com.moor.imkf.moorsdk.bean.MoorCheckCsrStatusBean;
 import com.moor.imkf.moorsdk.bean.MoorEmotion;
 import com.moor.imkf.moorsdk.bean.MoorFastBtnBean;
 import com.moor.imkf.moorsdk.bean.MoorFlowListBean;
-import com.moor.imkf.moorsdk.bean.MoorGetMsgBean;
 import com.moor.imkf.moorsdk.bean.MoorInfoBean;
 import com.moor.imkf.moorsdk.bean.MoorInputSuggestBean;
 import com.moor.imkf.moorsdk.bean.MoorMsgBean;
@@ -112,16 +115,17 @@ import com.moor.imkf.moorsdk.bean.MoorOrderCardBean;
 import com.moor.imkf.moorsdk.bean.MoorOrderInfoBean;
 import com.moor.imkf.moorsdk.bean.MoorPanelBean;
 import com.moor.imkf.moorsdk.bean.MoorQuickMenuBean;
-import com.moor.imkf.moorsdk.bean.MoorXbotQuickEvent;
 import com.moor.imkf.moorsdk.bean.MoorServerTimeBean;
+import com.moor.imkf.moorsdk.bean.MoorUploadBean;
+import com.moor.imkf.moorsdk.bean.MoorXbotQuickEvent;
 import com.moor.imkf.moorsdk.constants.MoorChatMsgType;
 import com.moor.imkf.moorsdk.constants.MoorConstants;
 import com.moor.imkf.moorsdk.constants.MoorEvaluationContans;
-import com.moor.imkf.moorsdk.constants.MoorPathConstants;
 import com.moor.imkf.moorsdk.db.MoorInfoDao;
 import com.moor.imkf.moorsdk.db.MoorMsgDao;
 import com.moor.imkf.moorsdk.db.MoorMsgHelper;
 import com.moor.imkf.moorsdk.db.MoorOptionsDao;
+import com.moor.imkf.moorsdk.events.MoorBlackListEvent;
 import com.moor.imkf.moorsdk.events.MoorBottomListEvent;
 import com.moor.imkf.moorsdk.events.MoorClaimEvent;
 import com.moor.imkf.moorsdk.events.MoorClearStatusEvent;
@@ -132,19 +136,19 @@ import com.moor.imkf.moorsdk.events.MoorNewChatEvent;
 import com.moor.imkf.moorsdk.events.MoorQueueEvent;
 import com.moor.imkf.moorsdk.events.MoorReadStatusEvent;
 import com.moor.imkf.moorsdk.events.MoorRobotEvent;
+import com.moor.imkf.moorsdk.events.MoorShowUnblockButtonEvent;
 import com.moor.imkf.moorsdk.events.MoorSocketNewMsg;
 import com.moor.imkf.moorsdk.events.MoorWithdrawMessage;
-import com.moor.imkf.moorsdk.jobqueue.base.JobManager;
 import com.moor.imkf.moorsdk.listener.IMoorMsgSendObservable;
 import com.moor.imkf.moorsdk.listener.IMoorMsgobserver;
 import com.moor.imkf.moorsdk.listener.IMoorUploadCallBackListener;
+import com.moor.imkf.moorsdk.manager.MoorActivityHolder;
 import com.moor.imkf.moorsdk.manager.MoorConfiguration;
 import com.moor.imkf.moorsdk.manager.MoorManager;
 import com.moor.imkf.moorsdk.moorjob.MoorMessageJob;
+import com.moor.imkf.moorsdk.upload.MoorUploadHelper;
 import com.moor.imkf.moorsdk.utils.MoorEventBusUtil;
-import com.moor.imkf.moorsdk.utils.MoorLogUtils;
-import com.moor.imkf.moorsdk.utils.MoorSPUtils;
-import com.moor.imkf.moorsdk.utils.MoorSdkVersionUtil;
+import com.moor.imkf.lib.utils.MoorSdkVersionUtil;
 import com.moor.imkf.moorsdk.utils.MoorUtils;
 import com.moor.imkf.moorsdk.utils.toast.MoorToastUtils;
 
@@ -159,8 +163,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import okhttp3.Call;
-
-import static com.moor.imkf.demo.multitype.MoorMultiTypeAsserts.assertAllRegistered;
 
 /**
  * <pre>
@@ -240,6 +242,8 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
      */
     public ArrayList<MoorFastBtnBean> fastBtnBeans;
     private boolean isFront = false;//记录当前页面是否在前台
+    //解封词
+    private String unblockContent;
     /**
      * adapter中的点击和长按等事件
      */
@@ -408,6 +412,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
                 @Override
                 public void run() {
                     updateMsg(oldMsg, null);
+                    checkNetDialog();
                 }
             });
         }
@@ -480,6 +485,14 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
         }
     }
 
+    public static MoorChatFragment newInstance(int preLoaderId) {
+        Bundle args = new Bundle();
+        args.putInt(MoorDemoConstants.MOOR_PRE_LOADER_ID, preLoaderId);
+        MoorChatFragment fragment = new MoorChatFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -502,12 +515,12 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
         options = MoorOptionsDao.getInstance().queryOptions();
 
         //机器人状态下是否显示加号，默认true展示
-        options.setRobotShowPanelButton(false);
+        options.setRobotShowPanelButton(true);
 
         MoorManager.getInstance().setOptions(options);
         moorConfiguration = MoorManager.getInstance().getMoorConfiguration();
 
-        MoorEventBusUtil.registerEventBus(this);
+
         infoBean = MoorInfoDao.getInstance().queryInfo();
         installOptions(options);
 
@@ -535,6 +548,8 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
                 , getResources().getString(R.string.moor_cancel));
         wsErrorDialog.setListener(netErrorDialogClick);
         hadInit = true;
+        MoorEventBusUtil.registerEventBus(this);
+
         return moorChatView;
     }
 
@@ -610,7 +625,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
     private class OnMsgCallBackListener implements IMoorGroupedDataListener<List<MoorMsgBean>> {
         @Override
         public void onDataArrived(List<MoorMsgBean> data) {
-            msgList = data;
+            msgList.addAll(data);
             if (msgList.size() > 0) {
                 msgPage++;
             }
@@ -962,7 +977,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
      * 应用UI配置项
      */
     private void installOptions(MoorOptions options) {
-        mChatPanelView.buildPanels(this, MoorPanelDataHelper.initPanelData());
+        mChatPanelView.buildPanels(this, MoorPanelDataHelper.getInstance().getPanelBeanList());
         int width = MoorScreenUtils.getScreenWidth(getActivity()) / 2 - MoorPixelUtil.dp2px(40f + 120f);
         llLayoutEmoji.setPadding(width, MoorPixelUtil.dp2px(23.5f), MoorPixelUtil.dp2px(8f), MoorPixelUtil.dp2px(23.5f));
         llLayoutEmoji.setBackgroundColor(MoorColorUtils.getColorWithAlpha(0.96f, getActivity().getResources().getColor(R.color.moor_color_eeeeee)));
@@ -1003,12 +1018,12 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
         }
 
         if (!options.isNeedSendImage()) {
-            MoorPanelDataHelper.removeItem(MoorPanelBean.TYPE.TYPE_IMAGE);
-            mChatPanelView.updatePanel(MoorPanelDataHelper.getPanelBeanList());
+            MoorPanelDataHelper.getInstance().removeItem(MoorPanelBean.TYPE.TYPE_IMAGE);
+            mChatPanelView.updatePanel(MoorPanelDataHelper.getInstance().getPanelBeanList());
         }
         if (!options.isNeedSendFile()) {
-            MoorPanelDataHelper.removeItem(MoorPanelBean.TYPE.TYPE_FILE);
-            mChatPanelView.updatePanel(MoorPanelDataHelper.getPanelBeanList());
+            MoorPanelDataHelper.getInstance().removeItem(MoorPanelBean.TYPE.TYPE_FILE);
+            mChatPanelView.updatePanel(MoorPanelDataHelper.getInstance().getPanelBeanList());
         }
         boolean useSendAction = options.isUseSystemKeyboardSendAction();
         if (useSendAction) {
@@ -1293,9 +1308,6 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
             }
         } else if (v.getId() == R.id.bt_chat_send) {
             //发送消息
-            if (!checkNetDialog()) {
-                return;
-            }
             sendChatInputMsg();
         } else if (v.getId() == R.id.chat_set_mode_keyboard) {
             //键盘按钮
@@ -1303,9 +1315,6 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
             mEtChatInput.requestFocus();
         } else if (v.getId() == R.id.chat_set_mode_voice) {
             //录音按钮
-            if (!checkNetDialog()) {
-                return;
-            }
             hidePanelAndKeyboard();
             MoorPermissionUtil.checkPermission(MoorChatFragment.this, new OnRequestCallback() {
                 @Override
@@ -1322,9 +1331,6 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
             mEtChatInput.onKeyUp(keyCode, keyEventUp);
         } else if (v.getId() == R.id.tv_send_emoji) {
             if (MoorAntiShakeUtils.getInstance().check()) {
-                return;
-            }
-            if (!checkNetDialog()) {
                 return;
             }
             //发送表情按钮
@@ -1378,7 +1384,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
                             mEtChatInput.requestFocus();
                         } else {
                             mEtChatInput.clearFocus();
-                            scrollToBottom();
+                            layoutManager.scrollToPosition(msgList.size() - 1);
                         }
                         if (v.getId() == R.id.chat_emoji_normal) {
                             mChatEmojiNormal.setSelected(switchToPanel != 0);
@@ -1419,12 +1425,12 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
      */
     private void evaluateBtnVisible() {
         if (MoorSPUtils.getInstance().getBoolean(MoorConstants.MOOR_SHOW_CSRBTN)) {
-            MoorPanelDataHelper.removeItem(MoorPanelBean.TYPE.TYPE_EVALUATE);
-            MoorPanelDataHelper.addItem(MoorPanelDataHelper.createEvaluateItem());
-            mChatPanelView.updatePanel(MoorPanelDataHelper.getPanelBeanList());
+            MoorPanelDataHelper.getInstance().removeItem(MoorPanelBean.TYPE.TYPE_EVALUATE);
+            MoorPanelDataHelper.getInstance().addItem(MoorPanelDataHelper.getInstance().createEvaluateItem());
+            mChatPanelView.updatePanel(MoorPanelDataHelper.getInstance().getPanelBeanList());
         } else {
-            MoorPanelDataHelper.removeItem(MoorPanelBean.TYPE.TYPE_EVALUATE);
-            mChatPanelView.updatePanel(MoorPanelDataHelper.getPanelBeanList());
+            MoorPanelDataHelper.getInstance().removeItem(MoorPanelBean.TYPE.TYPE_EVALUATE);
+            mChatPanelView.updatePanel(MoorPanelDataHelper.getInstance().getPanelBeanList());
         }
     }
 
@@ -1521,9 +1527,6 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
      * 通用发送文本消息
      */
     private void sendTextMsg(String text) {
-        if (!checkNetDialog()) {
-            return;
-        }
         if (TextUtils.isEmpty(text)) {
             return;
         }
@@ -1650,6 +1653,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
     public void onDestroyView() {
         super.onDestroyView();
         MoorKeyboardUtil.detach(getActivity());
+        MoorUploadHelper.getInstance().setCancelled(true);
     }
 
     @Override
@@ -1693,6 +1697,9 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
 
             case TYPE_ORDERCARD:
                 sendOrderCard();
+                break;
+            case TYPE_UNBLOCK:
+                unblockBlackList();
                 break;
             default:
                 break;
@@ -1787,7 +1794,6 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
         if (robotEvent != null) {
             if (robotEvent.getMoorMsgBean() != null) {
                 addMsgToPage(robotEvent.getMoorMsgBean());
-                scrollToBottom();
             }
             setMoreBtnVisiable();
             if (llQueueLayout != null) {
@@ -1923,8 +1929,8 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
             if (loadingDialog != null) {
                 loadingDialog.dismissDialog();
             }
-            if (msgPage>2) {
-                msgPage=2;
+            if (msgPage > 2) {
+                msgPage = 2;
             }
             getHistoryMsg(false, "SdkNewChat");
         } else {
@@ -1997,6 +2003,30 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
     }
 
     /**
+     * 被拉黑了，返回展示语
+     */
+    @Subscribe(sticky = true)
+    public void handleMoorBlackListEvent(MoorBlackListEvent blackListEvent) {
+        MoorMsgBean blackTipsMsg = MoorMsgHelper.createBlackTipsMsg(blackListEvent.getContent());
+        sendMsgToPage(blackTipsMsg);
+        MoorEventBusUtil.removeStickyEvent(blackListEvent);
+    }
+
+    /**
+     * 展示解封按钮
+     */
+    @Subscribe(sticky = true)
+    public void handleMoorShowUnblockButtonEvent(MoorShowUnblockButtonEvent showUnblockButtonEvent) {
+        if (!TextUtils.isEmpty(showUnblockButtonEvent.getContent())) {
+            unblockContent = showUnblockButtonEvent.getContent();
+        }
+        MoorPanelDataHelper.getInstance().removeItem(MoorPanelBean.TYPE.TYPE_UNBLOCK);
+        MoorPanelDataHelper.getInstance().addItem(MoorPanelDataHelper.getInstance().createUnblockItem());
+        mChatPanelView.updatePanel(MoorPanelDataHelper.getInstance().getPanelBeanList());
+        MoorEventBusUtil.removeStickyEvent(showUnblockButtonEvent);
+    }
+
+    /**
      * 打开本地相册
      */
     public void openAlbum() {
@@ -2052,7 +2082,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
      */
     private void dealCameraCallback() {
         String realPath = "";
-        if (MoorSdkVersionUtil.over_29()) {
+        if (MoorSdkVersionUtil.over29()) {
             // Android 10 使用图片uri加载
             Uri uri = MoorTakePicturesHelper.getInstance().getCameraUri();
             if (uri != null) {
@@ -2123,68 +2153,84 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
      * @param realPath
      * @param msgBean
      */
-    private void dealUpload(String realPath, final MoorMsgBean msgBean, final boolean isFile) {
+    private void dealUpload(final String realPath, final MoorMsgBean msgBean, final boolean isFile) {
         final int[] oldIndex = {-1};
-        MoorQiNiuUploadHelper.getInstance().uploadFile(realPath, new IMoorUploadCallBackListener() {
+        final int[] indexOf = {-1};
+        String fileName = MoorFileUtils.getFileName(realPath);
+        MoorHttpUtils.post()
+                .url(MoorUrlManager.BASE_URL + MoorUrlManager.GET_TOKEN)
+                .params(MoorHttpParams.getInstance().getToken(fileName))
+                .build().execute(new MoorBaseCallBack<MoorNetBaseBean<MoorUploadBean>>() {
             @Override
-            public void onUploadSuccess(String fileUrl) {
-                msgBean.setContent(fileUrl);
-                if (isFile) {
-                    msgBean.setFileProgress(100);
-                }
-                jobManagerSendMsg(msgBean);
-            }
+            public void onSuccess(MoorNetBaseBean<MoorUploadBean> result, int id) {
+                if (result.isSuccess()) {
+                    MoorUploadHelper.getInstance().dealUpload(realPath, result.getData(), new IMoorUploadCallBackListener() {
+                        @Override
+                        public void onUploadSuccess(String fileUrl) {
+                            msgBean.setContent(fileUrl);
+                            if (isFile) {
+                                msgBean.setFileProgress(100);
+                            }
+                            jobManagerSendMsg(msgBean);
+                        }
 
-            @Override
-            public void onUploadFailed() {
-                msgBean.setStatus(MoorChatMsgType.MSG_TYPE_STATUS_FAILURE);
-                //更新列表数据
-                int index = msgList.size() - 1;
-                for (int i = msgList.size() - 1; i >= 0; i--) {
-                    if (msgList.get(i).getMessageId().equals(msgBean.getMessageId())) {
-                        msgList.get(i).setStatus(msgBean.getStatus());
-                        index = i;
-                        break;
-                    }
-                }
-                final int finalIndex = index;
-                mActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyItemChanged(finalIndex);
-                    }
-                });
-                MoorMsgDao.getInstance().addMsg(msgBean);
-            }
+                        @Override
+                        public void onUploadFailed() {
+                            dealUploadFailed(msgBean, oldIndex, indexOf);
+                        }
 
-            @Override
-            public void onUploadProgress(int progress) {
-                if (isFile) {
-                    msgBean.setFileProgress(progress);
-                    //更新列表数据
-                    int index = msgList.size() - 1;
+                        @Override
+                        public void onUploadProgress(int progress) {
+                            if (isFile) {
+                                msgBean.setFileProgress(progress);
 
-                    if (oldIndex[0] == -1) {
-                        for (int i = msgList.size() - 1; i >= 0; i--) {
-                            if (msgList.get(i).getMessageId().equals(msgBean.getMessageId())) {
-                                msgList.get(i).setFileProgress(msgBean.getFileProgress());
-                                index = i;
-                                oldIndex[0] = index;
-                                break;
+                                //更新列表数据
+                                if (oldIndex[0] != msgList.size()) {
+                                    oldIndex[0] = msgList.size();
+                                    indexOf[0] = msgList.indexOf(msgBean);
+                                }
+                                mActivity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        adapter.notifyItemChanged(indexOf[0], MoorDemoConstants.MOOR_PAYLOAD_FILE_SEND_PROGRESS);
+                                    }
+                                });
                             }
                         }
-                    }
-
-                    final int finalIndex = index;
-                    mActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter.notifyItemChanged(finalIndex);
-                        }
                     });
+                } else {
+                    dealUploadFailed(msgBean, oldIndex, indexOf);
                 }
             }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                dealUploadFailed(msgBean, oldIndex, indexOf);
+            }
         });
+    }
+
+    /**
+     * 上传失败处理
+     *
+     * @param msgBean
+     * @param oldIndex
+     * @param indexOf
+     */
+    private void dealUploadFailed(MoorMsgBean msgBean, int[] oldIndex, final int[] indexOf) {
+        msgBean.setStatus(MoorChatMsgType.MSG_TYPE_STATUS_FAILURE);
+        //更新列表数据
+        if (oldIndex[0] != msgList.size()) {
+            oldIndex[0] = msgList.size();
+            indexOf[0] = msgList.indexOf(msgBean);
+        }
+        mActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyItemChanged(indexOf[0]);
+            }
+        });
+        MoorMsgDao.getInstance().addMsg(msgBean);
     }
 
     /**
@@ -2292,7 +2338,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
             try {
                 Intent intent = new Intent();
                 File file = new File(url);
-                if (MoorSdkVersionUtil.over_24()) {
+                if (MoorSdkVersionUtil.over24()) {
                     intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     intent.setAction(Intent.ACTION_VIEW);
                     Uri contentUri = FileProvider.getUriForFile(MoorUtils.getApp()
@@ -2751,7 +2797,6 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
             }
             return false;
         }
-
     }
 
     private final MoorCommonBottomDialog.OnClickListener netErrorDialogClick = new MoorCommonBottomDialog.OnClickListener() {
@@ -2810,9 +2855,6 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
                 true, "取消订单", MoorOrderCardBean.TAGTYPE_SELF, "",
                 "这是商品描述或者为订单描述文字说明说明说明", "￥9999", "https://dpic.tiankong.com/1n/e2/QJ6231550446.jpg@!350h", MoorOrderCardBean.TAGTYPE_USER, "TARGETTYPE_USER");
         if (!TextUtils.isEmpty(order)) {
-            if (!checkNetDialog()) {
-                return;
-            }
             MoorMsgBean orderMsg = MoorMsgHelper.createOrderCardMsg(order);
             sendMsgToPage(orderMsg);
             jobManagerSendMsg(orderMsg);
@@ -2870,5 +2912,15 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
                     });
         }
     }
+
+    /**
+     * 申请解封
+     */
+    private void unblockBlackList() {
+        MoorPanelDataHelper.getInstance().removeItem(MoorPanelBean.TYPE.TYPE_UNBLOCK);
+        mChatPanelView.updatePanel(MoorPanelDataHelper.getInstance().getPanelBeanList());
+        sendTextMsg(unblockContent);
+    }
+
 
 }

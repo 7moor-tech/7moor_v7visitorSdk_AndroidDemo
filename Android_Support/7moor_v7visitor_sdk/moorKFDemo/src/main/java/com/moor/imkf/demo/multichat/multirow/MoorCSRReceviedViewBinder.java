@@ -17,8 +17,6 @@ import com.moor.imkf.moorsdk.bean.MoorMsgBean;
 import com.moor.imkf.moorsdk.bean.MoorOptions;
 import com.moor.imkf.moorsdk.utils.MoorUtils;
 
-import java.util.List;
-
 public class MoorCSRReceviedViewBinder extends MoorBaseReceivedViewBinder<MoorMsgBean, MoorCSRReceviedViewBinder.ViewHolder> {
     private final MoorOptions options;
 
@@ -37,16 +35,6 @@ public class MoorCSRReceviedViewBinder extends MoorBaseReceivedViewBinder<MoorMs
         MoorBaseReceivedViewBinder.ViewHolder parent_holder = holder.getParent();
         gone_baseView(parent_holder);
         holder.setData(item);
-    }
-
-    @Override
-    protected void onBindContentViewHolder(@NonNull ViewHolder holder, @NonNull MoorMsgBean item, @NonNull List<Object> payloads) {
-
-    }
-
-    @Override
-    protected void onBaseViewRecycled(@NonNull ViewHolder holder) {
-
     }
 
     /*隐藏左侧头像，名称等ui */

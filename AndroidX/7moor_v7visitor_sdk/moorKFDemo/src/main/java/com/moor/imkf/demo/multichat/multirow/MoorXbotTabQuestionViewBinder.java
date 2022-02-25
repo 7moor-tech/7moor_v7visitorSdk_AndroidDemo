@@ -35,7 +35,6 @@ import com.moor.imkf.moorsdk.utils.MoorUtils;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * <pre>
@@ -77,16 +76,6 @@ public class MoorXbotTabQuestionViewBinder extends MoorBaseReceivedViewBinder<Mo
         }
         goneBaseView(parentHolder);
         holder.setData(item);
-    }
-
-    @Override
-    protected void onBindContentViewHolder(@NonNull ViewHolder holder, @NonNull MoorMsgBean item, @NonNull List<Object> payloads) {
-
-    }
-
-    @Override
-    protected void onBaseViewRecycled(@NonNull ViewHolder holder) {
-
     }
 
     /**
