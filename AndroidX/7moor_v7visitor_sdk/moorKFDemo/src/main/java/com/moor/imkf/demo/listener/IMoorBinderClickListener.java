@@ -23,7 +23,7 @@ public interface IMoorBinderClickListener {
      *
      * @param v    view
      * @param item 条目的MoorMsgBean
-     * @param o    传入事件需要携带的对象，可用作判断或传值
+     * @param type    传入事件需要携带的对象，可用作判断或传值
      */
-    void onLongClick(View v, MoorMsgBean item, Object o);
+    void onLongClick(View v, MoorMsgBean item, MoorEnumChatItemClickType type);
 }

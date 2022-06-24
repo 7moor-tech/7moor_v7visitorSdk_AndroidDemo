@@ -77,4 +77,7 @@
     <string name="moor_cancel_queue">退出排队</string>
     <string name="moor_cancel_queue_success">访客已退出排队</string>
     <string name="moor_withdraw_msg">撤回一条消息</string>
+    <string name="moor_chat_new_msg_tip">%d条新消息</string>
+    <string name="moor_chat_send_picture">发送</string>
+    <string name="moor_chat_Seating_inputting">客服正在输入...</string>
 </resources>

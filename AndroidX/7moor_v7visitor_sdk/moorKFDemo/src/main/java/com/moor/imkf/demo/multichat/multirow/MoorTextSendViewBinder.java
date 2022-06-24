@@ -1,7 +1,9 @@
 package com.moor.imkf.demo.multichat.multirow;
 
+import android.graphics.Color;
 import androidx.annotation.NonNull;
-import android.text.Spannable;
+
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +16,13 @@ import com.moor.imkf.demo.multichat.base.MoorBaseSendHolder;
 import com.moor.imkf.demo.multichat.base.MoorBaseSendViewBinder;
 import com.moor.imkf.demo.utils.MoorColorUtils;
 import com.moor.imkf.demo.utils.MoorEmojiBitmapUtil;
+import com.moor.imkf.demo.utils.MoorRegexUtils;
 import com.moor.imkf.demo.utils.MoorScreenUtils;
 import com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout;
 import com.moor.imkf.moorsdk.bean.MoorMsgBean;
 import com.moor.imkf.moorsdk.bean.MoorOptions;
+import com.moor.imkf.moorsdk.db.MoorInfoDao;
+import com.moor.imkf.moorsdk.manager.MoorManager;
 import com.moor.imkf.moorsdk.utils.MoorUtils;
 
 /**
@@ -56,12 +61,44 @@ public class MoorTextSendViewBinder extends MoorBaseSendViewBinder<MoorMsgBean, 
 
         }
         holder.chatContentTv.setMaxWidth((int) (MoorScreenUtils.getScreenWidthOrHeight(MoorUtils.getApp()) * 0.7));
+        SpannableString emotionSpannable;
         if (MoorEmojiBitmapUtil.getMoorEmotions().size() > 0) {
-            Spannable emotionSpannable = MoorEmojiSpanBuilder.buildEmotionSpannable(item.getContent());
-            holder.chatContentTv.setText(emotionSpannable);
+            emotionSpannable = MoorEmojiSpanBuilder.buildEmotionSpannable(item.getContent());
         } else {
-            holder.chatContentTv.setText(item.getContent());
+            emotionSpannable = new SpannableString(item.getContent());
         }
+
+
+        //开启访客关键词，并且关键词列表不为空
+        if (MoorManager.getInstance().isVisitorFocusWordsFlag() && MoorManager.getInstance().getVisitorFocusWords() != null) {
+            //从MoorManager获取访客关键词列表，如果长度异常，从数据库中重新解析一个
+            if (MoorManager.getInstance().getVisitorFocusWords().size() <= 0) {
+                if (TextUtils.isEmpty(MoorInfoDao.getInstance().queryInfo().getVisitorFocusWords())) {
+                    MoorManager.getInstance().setVisitorFocusWords(MoorInfoDao.getInstance().queryInfo().getVisitorFocusWords());
+                }
+            }
+            int color = MoorUtils.getApp().getResources().getColor(R.color.moor_color_151515);
+
+            if (options != null) {
+                String rightMsgTextColor = options.getRightMsgTextColor();
+                if (!TextUtils.isEmpty(rightMsgTextColor)) {
+                    color = MoorColorUtils.getColorWithAlpha(1f, rightMsgTextColor);
+                }
+            }
+
+            if (!TextUtils.isEmpty(MoorManager.getInstance().getVisitorFocusWordsColor())) {
+                try {
+                    color = Color.parseColor(MoorManager.getInstance().getVisitorFocusWordsColor());
+                } catch (Exception e) {
+                    color = MoorUtils.getApp().getResources().getColor(R.color.moor_color_151515);
+                }
+            }
+            //关键字匹配
+            holder.chatContentTv.setText(MoorRegexUtils.matchSearchText(color, emotionSpannable, MoorManager.getInstance().getVisitorFocusWords()));
+        } else {
+            holder.chatContentTv.setText(emotionSpannable);
+        }
+
 
     }
 

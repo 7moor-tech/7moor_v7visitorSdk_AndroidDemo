@@ -49,10 +49,56 @@
                 android:visibility="gone"
                 app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
+            <LinearLayout
+                android:id="@+id/ll_chat_newmsg_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/moor_chat_newmsg_bg"
+                android:orientation="horizontal"
+                android:paddingStart="15dp"
+                android:paddingTop="11dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="11dp">
+
+                <ImageView
+                    android:layout_width="9dp"
+                    android:layout_height="9dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/moor_icon_down" />
+
+                <TextView
+                    android:id="@+id/tv_chat_newmsg_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="9dp"
+                    android:maxLines="1"
+                    android:text="5条新消息"
+                    android:textColor="@color/moor_color_0081ff"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_chat_inputting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="start"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                android:text="@string/moor_chat_Seating_inputting"
+                android:textColor="@color/moor_color_666666"
+                android:textSize="12sp"
+                android:visibility="invisible" />
         </RelativeLayout>
 
         <!--排队数提示-->
         <include layout="@layout/moor_activity_queue_layout" />
+
+
 
         <View
             android:layout_width="match_parent"

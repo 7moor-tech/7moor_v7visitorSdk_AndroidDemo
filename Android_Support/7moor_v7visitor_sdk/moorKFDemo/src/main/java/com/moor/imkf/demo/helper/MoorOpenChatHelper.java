@@ -84,6 +84,7 @@ public class MoorOpenChatHelper {
             //初始化失败
             loadingDialog.dismissDialog();
             MoorEventBusUtil.post(new MoorLoginOffEvent());
+            MoorManager.getInstance().exitSdk();
             MoorLogUtils.e(errorCode.getMsg() + ":" + msg);
         }
     }

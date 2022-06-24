@@ -1,8 +1,5 @@
 package com.moor.imkf.demo.utils;
 
-import android.content.res.Resources;
-import android.util.TypedValue;
-
 import com.moor.imkf.lib.utils.MoorDensityUtil;
 
 /**

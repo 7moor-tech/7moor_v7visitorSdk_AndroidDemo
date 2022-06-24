@@ -23,7 +23,7 @@ public class MoorEmojiSpanBuilder {
     private static final String PATTERN = ":[^:]+:";
     private static final Pattern S_PATTERN_EMOTION = Pattern.compile(PATTERN, Pattern.CASE_INSENSITIVE);
 
-    public static Spannable buildEmotionSpannable(String text) {
+    public static SpannableString buildEmotionSpannable(String text) {
         Matcher matcherEmotion = S_PATTERN_EMOTION.matcher(text);
         SpannableString spannableString = new SpannableString(text);
         while (matcherEmotion.find()) {

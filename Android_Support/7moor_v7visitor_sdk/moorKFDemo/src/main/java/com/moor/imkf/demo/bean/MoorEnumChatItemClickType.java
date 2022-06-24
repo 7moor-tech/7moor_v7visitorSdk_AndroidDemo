@@ -66,10 +66,6 @@ public enum MoorEnumChatItemClickType {
      */
     TYPE_XBOT_QUICKMENU_CLICK("");
 
-
-    /**
-     * 消息重发
-     */
     private Object obj;
 
     MoorEnumChatItemClickType(Object... obj) {

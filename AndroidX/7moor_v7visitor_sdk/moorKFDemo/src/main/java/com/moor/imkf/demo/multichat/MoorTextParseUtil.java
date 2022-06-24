@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.moor.imkf.demo.R;
 import com.moor.imkf.demo.activity.MoorVideoActivity;
+import com.moor.imkf.demo.bean.MoorSendMsgEvent;
 import com.moor.imkf.demo.bean.MoorTransferAgentEvent;
 import com.moor.imkf.demo.constans.MoorDemoConstants;
 import com.moor.imkf.demo.emotion.MoorEmojiSpanBuilder;
@@ -142,7 +143,7 @@ public class MoorTextParseUtil {
         }
 
         if (spannable == null) {
-            spannable=new SpannableString(actionMsg);
+            spannable = new SpannableString(actionMsg);
         }
 
         SpannableStringBuilder contentSpannable = new SpannableStringBuilder(spannable);
@@ -345,6 +346,11 @@ public class MoorTextParseUtil {
                                     msg = msg.replace(aString.a,
                                             "[" + aString.content + "](moor_moor_m7_actionrobotTransferAgent.m7_data:" + aString.peerid + ".com)");
                                     aString.content = "------------___---------------";
+                                } else if ("xbot-quick-question".equals(aString.action)) {
+                                    //m7_action为 xbot-quick-question 是xbot提问内容，m7_data中是要发送的文案
+                                    msg = msg.replace(aString.a,
+                                            "[" + aString.content + "](moor_moor_m7_actionXbotQuickQuestionData.m7_data:" + aString.peerid + ".com)");
+                                    aString.content = "------------___---------------";
                                 }
                             }
 
@@ -435,8 +441,9 @@ public class MoorTextParseUtil {
     }
 
     public static CharSequence trimTrailingWhitespace(CharSequence source) {
-        if (source == null)
+        if (source == null) {
             return "";
+        }
 
         int i = source.length();
 
@@ -551,6 +558,17 @@ public class MoorTextParseUtil {
 //                    NumClickBottomSheetDialog dialog = NumClickBottomSheetDialog.instance(RegexUtils.regexNumber(action_str));
 //                    dialog.show(((ChatActivity) context).getSupportFragmentManager(), "");
                     openPhoneDialog(action_str);
+                }
+
+                if (action_str.startsWith("moor_moor_m7_actiondata-phone-href.m7-data-tel:")) {
+                    //第三种情况 发送xbot问题
+                    //moor_moor_m7_actionXbotQuickQuestionData.m7_data:"+问题+".com
+                    //以 ActionXbotQuickQuestion 开头取出中间文案作为消息发送
+                    action_str = action_str.replace("moor_moor_m7_actiondata-phone-href.m7-data-tel:", "");
+                    action_str = action_str.replace(".com", "");
+                    if (!TextUtils.isEmpty(action_str)) {
+                        MoorEventBusUtil.post(new MoorSendMsgEvent(action_str));
+                    }
                 }
 
 

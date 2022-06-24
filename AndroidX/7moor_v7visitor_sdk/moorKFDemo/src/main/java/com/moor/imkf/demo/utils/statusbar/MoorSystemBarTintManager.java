@@ -18,7 +18,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout.LayoutParams;
 
-
 import com.moor.imkf.lib.utils.MoorSdkVersionUtil;
 
 import java.lang.reflect.Method;

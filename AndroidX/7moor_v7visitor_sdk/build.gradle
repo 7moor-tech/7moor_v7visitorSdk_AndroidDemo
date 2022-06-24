@@ -2,6 +2,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.3'
@@ -10,9 +11,14 @@ buildscript {
 
 allprojects {
     repositories {
-//        maven { url  "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
+        //本地测试baseLib
+//        maven { url 'file:///Users/jiangbingxuan/AndroidLoaclAAR/moor_base_lib'}
+
+        maven { url  "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
+
         google()
         mavenCentral()
+        jcenter()
     }
 }
 
@@ -21,8 +27,8 @@ task clean(type: Delete) {
 }
 
 
-gradle.ext.versionCode = 4
-gradle.ext.versionName = "1.5.0"
+gradle.ext.versionCode = 6
+gradle.ext.versionName = "1.6.0"
 gradle.ext.compileSdkVersion = 29
 gradle.ext.minSdkVersion = 19
 gradle.ext.targetSdkVersion = 29

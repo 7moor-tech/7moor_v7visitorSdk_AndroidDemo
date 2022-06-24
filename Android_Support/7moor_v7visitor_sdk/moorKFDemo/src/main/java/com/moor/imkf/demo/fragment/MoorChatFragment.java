@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -46,6 +45,7 @@ import com.moor.imkf.demo.bean.MoorEnumChatItemClickType;
 import com.moor.imkf.demo.bean.MoorEvaluationBean;
 import com.moor.imkf.demo.bean.MoorGetListMsgBean;
 import com.moor.imkf.demo.bean.MoorIconUrlBean;
+import com.moor.imkf.demo.bean.MoorSendMsgEvent;
 import com.moor.imkf.demo.bean.MoorTransferAgentEvent;
 import com.moor.imkf.demo.constans.MoorDemoConstants;
 import com.moor.imkf.demo.constans.MoorEnumControlViewState;
@@ -86,6 +86,7 @@ import com.moor.imkf.demo.view.MoorPanelView;
 import com.moor.imkf.demo.view.MoorRoundImageView;
 import com.moor.imkf.demo.view.MoorSpaceItemDecoration;
 import com.moor.imkf.demo.view.audiobutton.MoorAudioRecorderButton;
+import com.moor.imkf.demo.view.imagepicker.CustomImgPickerPresenter;
 import com.moor.imkf.demo.view.loading.MoorLoadingDialog;
 import com.moor.imkf.demo.view.shadowlayout.MoorShadowLayout;
 import com.moor.imkf.lib.constants.MoorPathConstants;
@@ -96,6 +97,7 @@ import com.moor.imkf.lib.http.donwload.MoorDownLoadUtils;
 import com.moor.imkf.lib.jobqueue.base.JobManager;
 import com.moor.imkf.lib.utils.MoorAntiShakeUtils;
 import com.moor.imkf.lib.utils.MoorLogUtils;
+import com.moor.imkf.lib.utils.MoorSdkVersionUtil;
 import com.moor.imkf.lib.utils.sharedpreferences.MoorSPUtils;
 import com.moor.imkf.moorhttp.MoorHttpParams;
 import com.moor.imkf.moorhttp.MoorHttpUtils;
@@ -137,6 +139,7 @@ import com.moor.imkf.moorsdk.events.MoorQueueEvent;
 import com.moor.imkf.moorsdk.events.MoorReadStatusEvent;
 import com.moor.imkf.moorsdk.events.MoorRobotEvent;
 import com.moor.imkf.moorsdk.events.MoorShowUnblockButtonEvent;
+import com.moor.imkf.moorsdk.events.MoorSocketInputtingStatus;
 import com.moor.imkf.moorsdk.events.MoorSocketNewMsg;
 import com.moor.imkf.moorsdk.events.MoorWithdrawMessage;
 import com.moor.imkf.moorsdk.listener.IMoorMsgSendObservable;
@@ -148,9 +151,13 @@ import com.moor.imkf.moorsdk.manager.MoorManager;
 import com.moor.imkf.moorsdk.moorjob.MoorMessageJob;
 import com.moor.imkf.moorsdk.upload.MoorUploadHelper;
 import com.moor.imkf.moorsdk.utils.MoorEventBusUtil;
-import com.moor.imkf.lib.utils.MoorSdkVersionUtil;
 import com.moor.imkf.moorsdk.utils.MoorUtils;
 import com.moor.imkf.moorsdk.utils.toast.MoorToastUtils;
+import com.ypx.imagepicker.ImagePicker;
+import com.ypx.imagepicker.bean.ImageItem;
+import com.ypx.imagepicker.bean.MimeType;
+import com.ypx.imagepicker.bean.PickerError;
+import com.ypx.imagepicker.data.OnImagePickCompleteListener2;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -193,7 +200,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
     private View mPanelMore;
     private TextView mTvChatLogout;
     private RelativeLayout rlTitle, rlTopTip;
-    private TextView tvChatConvert, tvMoorTip, tvQueueNum, tv_queue_num_right, tv_queue_num_left, tv_chat_title;
+    private TextView tvChatConvert, tvMoorTip, tvQueueNum, tv_queue_num_right, tv_queue_num_left, tv_chat_title, tv_chat_inputting;
     private TextView mTvSendEmoji;
     private MoorShadowLayout slSendEmoji, slCancelQueue;
     private ImageView mIvDeleteEmoji, ivTipClose, iv_tip_img, ivCancelQueue;
@@ -208,6 +215,17 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
     private MoorOptions options;
     private int msgPage = 1;
     private ChatHandler chatHandler;
+    private LinearLayout llNewMsgLayout;
+    private TextView mTvNewMsgTip;
+
+    /*
+      未查看新消息的数量
+     */
+    private int mNewMsgCount;
+    /*
+    首条未查看新消息位置
+    */
+    private int mNewMsgPos = -1;
     /**
      * 预加载标识id
      */
@@ -244,6 +262,9 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
     private boolean isFront = false;//记录当前页面是否在前台
     //解封词
     private String unblockContent;
+
+    private DelayDealTask delayDealTask;
+
     /**
      * adapter中的点击和长按等事件
      */
@@ -364,7 +385,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
         }
 
         @Override
-        public void onLongClick(View v, MoorMsgBean item, Object o) {
+        public void onLongClick(View v, MoorMsgBean item, MoorEnumChatItemClickType o) {
 
         }
     };
@@ -855,11 +876,41 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
          * 退出排队按钮
          */
         slCancelQueue = llQueueLayout.findViewById(R.id.sl_cancel_queue);
+        /*
+         * 新消息提示
+         */
+        mTvNewMsgTip = moorChatView.findViewById(R.id.tv_chat_newmsg_tip);
+        /*
+         * 新消息
+         */
+        llNewMsgLayout = moorChatView.findViewById(R.id.ll_chat_newmsg_tip);
+        /*
+         *坐席正在输入
+         */
+        tv_chat_inputting = moorChatView.findViewById(R.id.tv_chat_inputting);
 
 
         moorSwipe.setProgressViewOffset(false, 0, MoorPixelUtil.dp2px(48));
         //底部列表分割线
         decor = new MoorSpaceItemDecoration(MoorPixelUtil.dp2px(10f), 0, MoorPixelUtil.dp2px(10f), 0);
+
+        mRvChat.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (layoutManager.findLastVisibleItemPosition() >= mNewMsgPos) {
+                    llNewMsgLayout.setVisibility(View.GONE);
+                    mNewMsgPos = -1;
+                    mNewMsgCount = 0;
+                }
+
+            }
+        });
     }
 
     /**
@@ -895,6 +946,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
                             if (sqlMsgData.size() == 20) {
                                 msgPage++;
                             }
+
                             mRvChat.post(new Runnable() {
                                 @Override
                                 public void run() {
@@ -903,6 +955,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
                                     }
                                     msgList.addAll(0, sqlMsgData);
                                     if (adapter != null) {
+                                        mNewMsgPos += sqlMsgData.size();
                                         adapter.notifyItemRangeInserted(0, sqlMsgData.size());
                                     }
                                 }
@@ -943,12 +996,59 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
         });
     }
 
+    public int dip2px(float dipValue) {
+        float scale = getContext().getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
+    }
+
+    /**
+     * 来新消息是否展示提示
+     * <p>
+     * 检查当前rv的最后一个view 是否在屏幕中显示的部分 ，计算的差值为 显示剩余多少
+     *
+     * @return true 代表触发
+     */
+    public boolean isCheckLastShow(RecyclerView recyclerView) {
+        if (recyclerView == null) {
+            return false;
+        }
+        int scroll_moveAll = recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset();
+        int rv_All = recyclerView.computeVerticalScrollRange();
+
+        //最后一条的高度
+        int last_H = layoutManager.findViewByPosition(layoutManager.findLastVisibleItemPosition()).getHeight();
+        //移除屏幕的距离=聊天整个rv的整体高度-(已经向下滚动的距离+当前显示区域的高度)
+        int move = rv_All - scroll_moveAll;
+
+        //此处临界值 暂时设定为 最后一条高度的 三分之1 被划出去
+        if (move >= (last_H / 2)) {
+            return true;
+        }
+
+        return false;
+    }
+
     private void getNewMsg(final List<MoorMsgBean> messageList) {
         if (messageList != null && messageList.size() > 0) {
             if (mRvChat != null) {
+                //不是系统消息并且不再底部
+                if (!"system".equals(messageList.get(0).getLocalUserType().toLowerCase()) && isCheckLastShow(mRvChat)) {
+
+                    if (mNewMsgPos == -1) {
+                        mNewMsgPos = msgList.size();
+                    }
+                    mTvNewMsgTip.setText(String.format(getString(R.string.moor_chat_new_msg_tip), ++mNewMsgCount));
+                    llNewMsgLayout.setVisibility(View.VISIBLE);
+                } else {
+                    mNewMsgPos = -1;
+                    mNewMsgCount = 0;
+                    llNewMsgLayout.setVisibility(View.GONE);
+                    scrollToBottom();
+                }
                 mRvChat.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
                         if (adapter != null) {
                             msgList.addAll(messageList);
                             Collections.sort(msgList, new Comparator<MoorMsgBean>() {
@@ -967,7 +1067,8 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
                         }
                     }
                 }, 100);
-                scrollToBottom();
+
+
             }
         }
     }
@@ -1131,6 +1232,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
         mIvDeleteEmoji.setOnClickListener(this);
         mTvSendEmoji.setOnClickListener(this);
         ivTipClose.setOnClickListener(this);
+        llNewMsgLayout.setOnClickListener(this);
         final boolean useSendAction = options.isUseSystemKeyboardSendAction();
         if (useSendAction) {
             //使用键盘上的发送键来发送消息
@@ -1338,6 +1440,23 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
         } else if (v.getId() == R.id.iv_tip_close) {
             //隐藏顶部Tip
             moorChatTipView.setVisibility(View.GONE);
+        } else if (v.getId() == R.id.ll_chat_newmsg_tip) {
+            if (mRvChat != null) {
+
+                mRvChat.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mRvChat != null) {
+                            layoutManager.scrollToPosition(mNewMsgPos);//mNewMsgPos-1是第一条新消息的位置，此处显示第二条
+                            mRvChat.smoothScrollBy(0, MoorPixelUtil.dp2px(55));
+                            mNewMsgPos = -1;
+                            mNewMsgCount = 0;
+                            llNewMsgLayout.setVisibility(View.GONE);
+                        }
+
+                    }
+                }, 200);
+            }
         }
     }
 
@@ -1706,6 +1825,25 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
         }
     }
 
+    /**
+     * 收到 Socket 坐席正在输入状态
+     *
+     * @param moorSocketInputtingStatus
+     */
+    @Subscribe
+    public void handleMoorSocketInputtingStatus(MoorSocketInputtingStatus moorSocketInputtingStatus) {
+        //socket收到正在输入提示
+        tv_chat_inputting.setVisibility(View.VISIBLE);
+        //5秒后隐藏提示文字
+        if (delayDealTask != null) {
+            delayDealTask.setCanceled(true);
+            chatHandler.removeCallbacks(delayDealTask);
+        } else {
+            delayDealTask = new DelayDealTask();
+        }
+        delayDealTask.setCanceled(false);
+        chatHandler.postDelayed(delayDealTask, 4000);
+    }
 
     /**
      * 收到 Socket 新消息
@@ -1860,6 +1998,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
                 llQueueLayout.setVisibility(View.VISIBLE);
 
                 if (!TextUtils.isEmpty(queueTips)) {
+                    queueTips = " " + queueTips + " ";
                     try {
                         String[] split = queueTips.split("\\{num\\}");
                         if (split.length == 2) {
@@ -1938,6 +2077,17 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
             getActivity().finish();
         }
     }
+
+    /**
+     * event事件用于处理发送一条消息
+     *
+     * @param sendMsgEvent
+     */
+    @Subscribe
+    public void handleMoorSendMsgEvent(MoorSendMsgEvent sendMsgEvent) {
+        sendTextMsg(sendMsgEvent.getContent());
+    }
+
 
     /**
      * 机器人点击转人工
@@ -2030,14 +2180,49 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
      * 打开本地相册
      */
     public void openAlbum() {
-        try {
-            Intent picture = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            picture.setType("image/*");
-            startActivityForResult(picture, MoorDemoConstants.PICK_IMAGE_ACTIVITY_REQUEST_CODE);
-        } catch (Exception e) {
-            e.printStackTrace();
-            MoorToastUtils.showShort(getString(R.string.moor_no_photo_album));
-        }
+        //使用系统图库单选图片
+//        try {
+//            Intent picture = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//            picture.setType("image/*");
+//            startActivityForResult(picture, MoorDemoConstants.PICK_IMAGE_ACTIVITY_REQUEST_CODE);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            MoorToastUtils.showShort(getString(R.string.moor_no_photo_album));
+//        }
+
+        //多选图片
+        ImagePicker.withMulti(new CustomImgPickerPresenter())//指定presenter
+                //设置选择的最大数
+                .setMaxCount(9)
+                //设置列数
+                .setColumnCount(4)
+                //设置要加载的文件类型，可指定单一类型
+                .mimeTypes(MimeType.ofImage())
+                .filterMimeTypes(MimeType.ofVideo())
+                .showCamera(false)//显示拍照
+                .setPreview(true)//开启预览
+                .pick(mActivity, new OnImagePickCompleteListener2() {
+                    @Override
+                    public void onImagePickComplete(ArrayList<ImageItem> items) {
+                        hidePanelAndKeyboard();
+                        //图片选择回调，主线程
+                        for (ImageItem imageItem : items) {
+                            String realPath = MoorFileUtils.getRealPathFromUri(mActivity, imageItem.getUri());
+                            final MoorMsgBean msgBean = MoorMsgHelper.createImageMsg(realPath);
+                            if (!TextUtils.isEmpty(realPath)) {
+                                sendMsgToPage(msgBean);
+                                dealUpload(realPath, msgBean, false);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onPickFailed(PickerError error) {
+                        //调用选择器失败回调
+                        hidePanelAndKeyboard();
+                    }
+                });
     }
 
     /**
@@ -2161,53 +2346,53 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
                 .url(MoorUrlManager.BASE_URL + MoorUrlManager.GET_TOKEN)
                 .params(MoorHttpParams.getInstance().getToken(fileName))
                 .build().execute(new MoorBaseCallBack<MoorNetBaseBean<MoorUploadBean>>() {
-            @Override
-            public void onSuccess(MoorNetBaseBean<MoorUploadBean> result, int id) {
-                if (result.isSuccess()) {
-                    MoorUploadHelper.getInstance().dealUpload(realPath, result.getData(), new IMoorUploadCallBackListener() {
-                        @Override
-                        public void onUploadSuccess(String fileUrl) {
-                            msgBean.setContent(fileUrl);
-                            if (isFile) {
-                                msgBean.setFileProgress(100);
-                            }
-                            jobManagerSendMsg(msgBean);
-                        }
+                    @Override
+                    public void onSuccess(MoorNetBaseBean<MoorUploadBean> result, int id) {
+                        if (result.isSuccess()) {
+                            MoorUploadHelper.getInstance().dealUpload(realPath, result.getData(), new IMoorUploadCallBackListener() {
+                                @Override
+                                public void onUploadSuccess(String fileUrl) {
+                                    msgBean.setContent(fileUrl);
+                                    if (isFile) {
+                                        msgBean.setFileProgress(100);
+                                    }
+                                    jobManagerSendMsg(msgBean);
+                                }
 
-                        @Override
-                        public void onUploadFailed() {
+                                @Override
+                                public void onUploadFailed() {
+                                    dealUploadFailed(msgBean, oldIndex, indexOf);
+                                }
+
+                                @Override
+                                public void onUploadProgress(int progress) {
+                                    if (isFile) {
+                                        msgBean.setFileProgress(progress);
+
+                                        //更新列表数据
+                                        if (oldIndex[0] != msgList.size()) {
+                                            oldIndex[0] = msgList.size();
+                                            indexOf[0] = msgList.indexOf(msgBean);
+                                        }
+                                        mActivity.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                adapter.notifyItemChanged(indexOf[0], MoorDemoConstants.MOOR_PAYLOAD_FILE_SEND_PROGRESS);
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        } else {
                             dealUploadFailed(msgBean, oldIndex, indexOf);
                         }
+                    }
 
-                        @Override
-                        public void onUploadProgress(int progress) {
-                            if (isFile) {
-                                msgBean.setFileProgress(progress);
-
-                                //更新列表数据
-                                if (oldIndex[0] != msgList.size()) {
-                                    oldIndex[0] = msgList.size();
-                                    indexOf[0] = msgList.indexOf(msgBean);
-                                }
-                                mActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        adapter.notifyItemChanged(indexOf[0], MoorDemoConstants.MOOR_PAYLOAD_FILE_SEND_PROGRESS);
-                                    }
-                                });
-                            }
-                        }
-                    });
-                } else {
-                    dealUploadFailed(msgBean, oldIndex, indexOf);
-                }
-            }
-
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                dealUploadFailed(msgBean, oldIndex, indexOf);
-            }
-        });
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        dealUploadFailed(msgBean, oldIndex, indexOf);
+                    }
+                });
     }
 
     /**
@@ -2285,6 +2470,7 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
         String url = (String) obj[0];
         final int position = (int) obj[1];
         if (url.startsWith("http")) {
+            //来自网络先下载
             MoorDownLoadUtils.loadFile(url, item.getFileName(), new IMoorOnDownloadListener() {
                 @Override
                 public void onDownloadStart() {
@@ -2372,14 +2558,14 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
         MoorMsgDao.getInstance().updateMoorMsgBeanToDao(item);
 
         MoorHttpUtils.post().params(MoorHttpParams.getInstance().robotFeedBack(
-                item.getRobotId()
-                , item.getOriQuestion()
-                , item.getRobotType()
-                , item.getStdQuestion()
-                , item.getContent()
-                , item.getConfidence()
-                , isUseFul
-                , item.getMessageId()))
+                        item.getRobotId()
+                        , item.getOriQuestion()
+                        , item.getRobotType()
+                        , item.getStdQuestion()
+                        , item.getContent()
+                        , item.getConfidence()
+                        , isUseFul
+                        , item.getMessageId()))
                 .url(MoorUrlManager.BASE_URL + MoorUrlManager.ROBOT_FEEDBACK)
                 .tag(getActivity())
                 .build().execute(null);
@@ -2922,5 +3108,24 @@ public class MoorChatFragment extends Fragment implements IMoorPanelOnClickListe
         sendTextMsg(unblockContent);
     }
 
+    /**
+     * 延迟调用
+     */
+    private class DelayDealTask implements Runnable {
+        private boolean canceled = false;
+
+        @Override
+        public void run() {
+            if (canceled) {
+                return;
+            }
+            tv_chat_inputting.setVisibility(View.INVISIBLE);
+        }
+
+        public DelayDealTask setCanceled(boolean canceled) {
+            this.canceled = canceled;
+            return this;
+        }
+    }
 
 }

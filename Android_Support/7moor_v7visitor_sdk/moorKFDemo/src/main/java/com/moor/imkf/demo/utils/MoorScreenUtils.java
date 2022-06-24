@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import android.graphics.Point;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 

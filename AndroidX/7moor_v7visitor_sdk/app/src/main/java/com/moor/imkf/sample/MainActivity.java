@@ -2,7 +2,6 @@ package com.moor.imkf.sample;
 
 import android.os.Build;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -71,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                 .setUserId(Build.ID)
                 //必填 设置初始化访客的昵称 (自定义，下方配置Build.MODEL为演示)
                 .setUserName(Build.MODEL)
+                //选填 接入别名
+                .setUserAlias("别名Alias")
                 //选填 设置访客头像
                 .setUserHeadImg("https://dpic.tiankong.com/b7/jm/QJ6327498134.jpg?x-oss-process=style/794ws")
                 //必填 sdk的服务地址类型

@@ -2,9 +2,7 @@ package com.moor.imkf.demo.utils;
 
 import android.os.Environment;
 
-
 import com.moor.imkf.lib.utils.MoorSdkVersionUtil;
-
 
 import java.io.File;
 

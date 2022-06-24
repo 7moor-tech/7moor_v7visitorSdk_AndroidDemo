@@ -7,6 +7,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -268,12 +269,37 @@ public class MoorRegexUtils {
     }
 
     //匹配关键词
+    public static SpannableString matchSearchText(String color_str, String txt, String keyword) {
+        int color = Color.parseColor(color_str);
+        return matchSearchText(color, txt, keyword);
+    }
+
+    //匹配关键词
+    public static SpannableString matchSearchText(String color_str, SpannableString spannableString, String keyword) {
+        int color = Color.parseColor(color_str);
+        return matchSearchText(color, spannableString, keyword);
+    }
+
+    //匹配关键词
     public static SpannableString matchSearchText(int color, String txt, String keyword) {
         SpannableString spannableString = new SpannableString(txt);
+        return matchSearchText(color, spannableString, keyword);
+    }
+
+    //匹配关键词数组
+    public static SpannableString matchSearchText(int color, Spannable spannableString, ArrayList<String> keywords) {
+        SpannableString string = new SpannableString(spannableString);
+        for (String keyword : keywords) {
+            string = matchSearchText(color, string, keyword);
+        }
+        return string;
+    }
+
+    public static SpannableString matchSearchText(int color, SpannableString spannableString, String keyword) {
         String regEx = "[\n`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。， 、？\\\\]";
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(keyword);
-        String regex = m.replaceAll("");
+        String regex = m.replaceAll("*");
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(spannableString);
         while (matcher.find()) {
@@ -286,6 +312,7 @@ public class MoorRegexUtils {
         }
         return spannableString;
     }
+
 
     //匹配数字并设置颜色跟随主题色
     public static SpannableStringBuilder setPhoneNum(SpannableStringBuilder spannableString, String corlor) {
@@ -300,4 +327,21 @@ public class MoorRegexUtils {
         }
         return spannableString;
     }
+
+
+    /**
+     * 匹配敏感词并替换为**
+     *
+     * @param originalStr
+     * @param keywords
+     * @return
+     */
+    public static String matchAgentSensitiveWords(String originalStr, ArrayList<String> keywords) {
+        for (String keyword : keywords) {
+            originalStr = originalStr.replace(keyword, "**");
+        }
+        return originalStr;
+    }
+
+
 }
