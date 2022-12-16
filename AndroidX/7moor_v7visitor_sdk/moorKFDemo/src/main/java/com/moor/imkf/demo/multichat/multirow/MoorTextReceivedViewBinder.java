@@ -115,7 +115,7 @@ public class MoorTextReceivedViewBinder extends MoorBaseReceivedViewBinder<MoorM
 
                 //标准解析
                 SpannableStringBuilder parseText = MoorTextParseUtil.getInstance().parseText(item);
-                if (parseText == null || !TextUtils.isEmpty(parseText.toString())) {
+                if (parseText == null || TextUtils.isEmpty(parseText.toString())) {
                     parseText = new SpannableStringBuilder(item.getContent());
                 }
 

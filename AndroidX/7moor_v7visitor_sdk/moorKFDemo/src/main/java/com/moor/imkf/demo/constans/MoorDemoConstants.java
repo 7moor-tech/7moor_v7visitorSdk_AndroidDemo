@@ -83,5 +83,9 @@ public class MoorDemoConstants {
      * 录制语音消息最大时长
      */
     public static final int VOICE_RECOERD_LONG_MAX = 60;
+    /**
+     * 用于转换标签支持字号
+     */
+    public static final String MOOR_FONTSIZE_TAG ="moorFont";
 
 }

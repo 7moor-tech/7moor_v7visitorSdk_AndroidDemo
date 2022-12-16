@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 在坐席后台创建的sdk渠道接入的accessid
      */
-    private String accessid = "";
+    private String accessid = " ";
 
 
     @Override

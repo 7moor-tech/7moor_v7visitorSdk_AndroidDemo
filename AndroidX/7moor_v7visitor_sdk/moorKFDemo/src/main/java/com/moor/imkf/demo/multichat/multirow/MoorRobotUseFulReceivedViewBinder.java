@@ -101,6 +101,8 @@ public class MoorRobotUseFulReceivedViewBinder extends MoorBaseReceivedViewBinde
 
         String flowTips = item.getFlowTips();
         if (!TextUtils.isEmpty(flowTips)) {
+            flowTips = flowTips.replaceAll("<font", "<"+MoorDemoConstants.MOOR_FONTSIZE_TAG);
+            flowTips = flowTips.replaceAll("</font>", "</"+MoorDemoConstants.MOOR_FONTSIZE_TAG+">");
             Spanned spanned;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 spanned = Html.fromHtml(flowTips, Html.FROM_HTML_MODE_COMPACT);

@@ -34,6 +34,7 @@ import com.moor.imkf.demo.bean.MoorSendMsgEvent;
 import com.moor.imkf.demo.bean.MoorTransferAgentEvent;
 import com.moor.imkf.demo.constans.MoorDemoConstants;
 import com.moor.imkf.demo.emotion.MoorEmojiSpanBuilder;
+import com.moor.imkf.demo.utils.HtmlTagHandler;
 import com.moor.imkf.demo.utils.MoorColorUtils;
 import com.moor.imkf.demo.utils.MoorEmojiBitmapUtil;
 import com.moor.imkf.demo.utils.MoorPixelUtil;
@@ -74,13 +75,10 @@ import java.util.regex.Pattern;
 public class MoorTextParseUtil {
 
     private Spannable spannable;
-    private int moorDefaultThemeColor;
+    private static int moorDefaultThemeColor = -1;
 
     private MoorTextParseUtil() {
-        MoorOptions options = MoorManager.getInstance().getOptions();
-        if (options != null) {
-            moorDefaultThemeColor = MoorColorUtils.getColorWithAlpha(1f, options.getSdkMainThemeColor());
-        }
+
         MoorEventBusUtil.registerEventBus(this);
     }
 
@@ -90,6 +88,14 @@ public class MoorTextParseUtil {
     }
 
     public static MoorTextParseUtil getInstance() {
+
+        if (moorDefaultThemeColor == -1) {
+            MoorOptions options = MoorManager.getInstance().getOptions();
+            if (options != null) {
+                moorDefaultThemeColor = MoorColorUtils.getColorWithAlpha(1f, options.getSdkMainThemeColor());
+            }
+        }
+
         return MoorTextParseUtil.SingletonHolder.sInstance;
     }
 
@@ -221,6 +227,8 @@ public class MoorTextParseUtil {
                 if (text.contains("</a>") && (!text.contains("1："))) {
 
                     String str = setA_String(strings[i]);
+                    str = str.replaceAll("<font", "<" + MoorDemoConstants.MOOR_FONTSIZE_TAG);
+                    str = str.replaceAll("</font>", "</" + MoorDemoConstants.MOOR_FONTSIZE_TAG + ">");
                     Spanned string;
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                         string = Html.fromHtml(str, Html.FROM_HTML_MODE_COMPACT);
@@ -377,30 +385,34 @@ public class MoorTextParseUtil {
             }
         }
 
-        msg = msg.replaceAll("<p>", "");
+//        msg = msg.replaceAll("<p>", "");
+//
+//        msg = msg.replaceAll("</p>", "\n");
 
-        msg = msg.replaceAll("</p>", "\n");
-
-        msg = msg.replaceAll("<p .*?>", "\r\n");
+//        msg = msg.replaceAll("<p .*?>", "\r\n");
         // <br><br/>替换为换行
-        msg = msg.replaceAll("<br\\s*/?>", "\r\n");
+//        msg = msg.replaceAll("<br\\s*/?>", "\r\n");
         // 去掉其它的<>之间的东西
-        msg = msg.replaceAll("\\<.*?>", "");
+//        msg = msg.replaceAll("\\<.*?>", "");
 
 
         if (!message.endsWith("\n")) {
             msg = trimTrailingWhitespace(msg).toString();
         }
 
-//        Spanned spanned;
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//            spanned = Html.fromHtml(msg, Html.FROM_HTML_MODE_COMPACT);
-//        } else {
-//            spanned = Html.fromHtml(msg);
-//        }
-//        CharSequence charSequence = trimTrailingWhitespace(spanned);
+        msg = msg.replaceAll("<font", "<" + MoorDemoConstants.MOOR_FONTSIZE_TAG);
+        msg = msg.replaceAll("</font>", "</" + MoorDemoConstants.MOOR_FONTSIZE_TAG + ">");
+        Spanned string;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            string = Html.fromHtml(msg, Html.FROM_HTML_MODE_COMPACT, null, new HtmlTagHandler(MoorDemoConstants.MOOR_FONTSIZE_TAG));
+        } else {
+            string = Html.fromHtml(msg, null, new HtmlTagHandler(MoorDemoConstants.MOOR_FONTSIZE_TAG));
+        }
+        SpannableStringBuilder spannableString = new SpannableStringBuilder(trimTrailingWhitespace(string));
+        spannableString = getClickableHtml(spannableString);
 
-        SpannableStringBuilder spannableString = new SpannableStringBuilder(msg);
+//        SpannableStringBuilder spannableString = new SpannableStringBuilder(msg);
+
         Pattern patten = Pattern.compile("\\d+[：].*+\\n", Pattern.CASE_INSENSITIVE);
         Matcher matcher = patten.matcher(spannableString);
         while (matcher.find()) {
@@ -700,7 +712,8 @@ public class MoorTextParseUtil {
             if (message.getContent().contains("</a>") && (!message.getContent().contains("1："))) {
 
                 String actionmsg = setA_String(strings[i]);
-
+                actionmsg = actionmsg.replaceAll("<font", "<" + MoorDemoConstants.MOOR_FONTSIZE_TAG);
+                actionmsg = actionmsg.replaceAll("</font>", "</" + MoorDemoConstants.MOOR_FONTSIZE_TAG + ">");
                 Spanned string;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                     string = Html.fromHtml(actionmsg, Html.FROM_HTML_MODE_COMPACT);
